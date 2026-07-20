@@ -18,7 +18,18 @@ export default function Layout() {
     }));
   };
 
-  const { role } = useAuth();
+  const { role, salirDemo } = useAuth();
+  const isDemo = localStorage.getItem('argentum_demo_mode') === 'true';
+  const rubro = localStorage.getItem('argentum_rubro') || 'carniceria';
+
+  const rubroNames = {
+    'pet-shop': 'Pet Shop 🐾',
+    'panaderia': 'Panadería 🥐',
+    'mini-mercado': 'Mini-mercado 🏪',
+    'dietetica': 'Dietética 🌿',
+    'fiambreria': 'Fiambrería 🥪',
+    'carniceria': 'Carnicería 🥩'
+  };
 
   const navItems = [
     { path: '/ventas-home', label: 'Inicio de Ventas', icon: <Store size={20} />, allowed: ['ventas'] },
@@ -53,8 +64,12 @@ export default function Layout() {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    await supabase.auth.signOut();
-    navigate('/');
+    if (isDemo) {
+      salirDemo();
+    } else {
+      await supabase.auth.signOut();
+      navigate('/');
+    }
   };
 
   return (
@@ -78,6 +93,21 @@ export default function Layout() {
         <div className="sidebar-header">
           <h2 className="brand-title">Argentum</h2>
           <p className="brand-subtitle">Gestión Interna</p>
+          {isDemo && (
+            <div style={{
+              marginTop: '12px',
+              padding: '6px 12px',
+              backgroundColor: '#3b82f620',
+              border: '1px solid #3b82f650',
+              borderRadius: '8px',
+              fontSize: '0.8rem',
+              color: '#60a5fa',
+              fontWeight: '600',
+              textAlign: 'center'
+            }}>
+              Demo: {rubroNames[rubro] || rubro}
+            </div>
+          )}
         </div>
 
         <nav className="sidebar-nav">
@@ -149,7 +179,7 @@ export default function Layout() {
             title="Cerrar Sesión"
           >
             <span className="link-icon"><LogOut size={20} /></span>
-            <span>Cerrar Sesión</span>
+            <span>{isDemo ? 'Salir de Demo' : 'Cerrar Sesión'}</span>
           </button>
         </div>
       </aside>
@@ -159,9 +189,41 @@ export default function Layout() {
         <div className="mobile-overlay" onClick={() => setMobileMenuOpen(false)}></div>
       )}
 
-      <main className="main-content">
-        <Outlet />
+      <main className="main-content" style={{ display: 'flex', flexDirection: 'column' }}>
+        {isDemo && (
+          <div style={{
+            backgroundColor: '#1e3a8a',
+            color: '#93c5fd',
+            padding: '10px 20px',
+            fontSize: '0.85rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderBottom: '1px solid #2563eb'
+          }}>
+            <span>Estás examinando la versión de prueba para: <strong>{rubroNames[rubro] || rubro}</strong>. Todos los cambios se guardan localmente.</span>
+            <button 
+              onClick={salirDemo}
+              style={{
+                backgroundColor: '#ef4444',
+                color: '#fff',
+                border: 'none',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontSize: '0.75rem',
+                fontWeight: '700',
+                cursor: 'pointer'
+              }}
+            >
+              Salir de Demo
+            </button>
+          </div>
+        )}
+        <div style={{ flex: 1, padding: '24px', overflowY: 'auto' }}>
+          <Outlet />
+        </div>
       </main>
     </div>
   );
 }
+

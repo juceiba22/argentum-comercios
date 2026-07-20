@@ -16,6 +16,40 @@ export default function PromocionesPublicas() {
 
   const WHATSAPP_NUMBER = "5491125675158";
 
+  const isDemo = localStorage.getItem('argentum_demo_mode') === 'true';
+  const rubro = localStorage.getItem('argentum_rubro') || 'carniceria';
+
+  const rubroNames = {
+    'pet-shop': 'Argentum Pet Shop 🐾',
+    'panaderia': 'Argentum Panadería 🥐',
+    'mini-mercado': 'Argentum Mini-mercado 🏪',
+    'dietetica': 'Argentum Dietética 🌿',
+    'fiambreria': 'Argentum Fiambrería 🥪',
+    'carniceria': 'Lo de Cacho Carnes 🥩'
+  };
+
+  const rubroSubtitles = {
+    'pet-shop': 'Todo para el cuidado y alimentación de tus mejores amigos.',
+    'panaderia': 'Panes calentitos, facturas y delicias recién horneadas.',
+    'mini-mercado': 'Tus productos de almacén al mejor precio todos los días.',
+    'dietetica': 'Alimentación consciente y productos naturales seleccionados.',
+    'fiambreria': 'Tablas de fiambres premium, quesos y encurtidos deliciosos.',
+    'carniceria': 'Las mejores ofertas en cortes seleccionados para vos.'
+  };
+
+  const rubroAliases = {
+    'pet-shop': 'argentum.petshop',
+    'panaderia': 'argentum.panaderia',
+    'mini-mercado': 'argentum.minimercado',
+    'dietetica': 'argentum.dietetica',
+    'fiambreria': 'argentum.fiambreria',
+    'carniceria': 'lodecacho.carnes'
+  };
+
+  const currentTitle = isDemo ? rubroNames[rubro] : 'Lo de Cacho Carnes';
+  const currentSubtitle = isDemo ? rubroSubtitles[rubro] : 'Las mejores ofertas en cortes seleccionados para vos.';
+  const currentAlias = isDemo ? rubroAliases[rubro] : 'lodecacho.carnes';
+
   useEffect(() => {
     const fetchPromos = async () => {
       try {
@@ -77,7 +111,7 @@ export default function PromocionesPublicas() {
       if (datosEntrega.metodo === 'domicilio') {
         mensaje += `*Dirección:* ${datosEntrega.direccion}\n`;
       }
-      mensaje += `\nEntiendo que el pago es en Efectivo o Transferencia al alias lodecacho.carnes. ¡Gracias!`;
+      mensaje += `\nEntiendo que el pago es en Efectivo o Transferencia al alias ${currentAlias}. ¡Gracias!`;
 
       // 3. Abrir WhatsApp y limpiar carrito
       const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
@@ -102,9 +136,9 @@ export default function PromocionesPublicas() {
         
         <header style={{ textAlign: 'center', marginBottom: '48px' }}>
           <h1 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '16px', background: 'linear-gradient(to right, #f87171, #fb923c)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-            Lo de Cacho Carnes
+            {currentTitle}
           </h1>
-          <p style={{ fontSize: '1.2rem', color: '#94a3b8' }}>Las mejores ofertas en cortes seleccionados para vos.</p>
+          <p style={{ fontSize: '1.2rem', color: '#94a3b8' }}>{currentSubtitle}</p>
         </header>
 
         {loading ? (
@@ -346,7 +380,7 @@ export default function PromocionesPublicas() {
                   Recordá que las promociones exclusivas web se abonan únicamente en <strong>Efectivo</strong> o <strong>Transferencia</strong>.
                 </p>
                 <p style={{ color: '#93c5fd', fontWeight: 'bold', margin: '8px 0 0 0', fontSize: '1rem' }}>
-                  Alias: <span style={{ background: 'rgba(59,130,246,0.2)', padding: '2px 6px', borderRadius: '4px' }}>lodecacho.carnes</span>
+                  Alias: <span style={{ background: 'rgba(59,130,246,0.2)', padding: '2px 6px', borderRadius: '4px' }}>{currentAlias}</span>
                 </p>
               </div>
             </div>

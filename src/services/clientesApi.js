@@ -1,7 +1,12 @@
 import { supabase } from './supabaseClient';
+import { isDemoMode, demoDb } from './demoService';
 
 // Crear un nuevo cliente con datos fiscales
 export const createCliente = async (clienteData) => {
+  if (isDemoMode()) {
+    return demoDb.addCliente(clienteData);
+  }
+
   const { data, error } = await supabase
     .from('clientes')
     .insert([
@@ -24,6 +29,10 @@ export const createCliente = async (clienteData) => {
 
 // Actualizar un cliente existente
 export const updateClienteFiscal = async (clienteId, clienteData) => {
+  if (isDemoMode()) {
+    return demoDb.updateCliente(clienteId, clienteData);
+  }
+
   const { data, error } = await supabase
     .from('clientes')
     .update({
@@ -45,6 +54,10 @@ export const updateClienteFiscal = async (clienteId, clienteData) => {
 
 // Buscar un cliente por ID exacto
 export const getClienteById = async (id) => {
+  if (isDemoMode()) {
+    return demoDb.getClienteById(id);
+  }
+
   const { data, error } = await supabase
     .from('clientes')
     .select('*')
@@ -57,6 +70,10 @@ export const getClienteById = async (id) => {
 
 // Obtener pedidos de un cliente específico, incluyendo sus ítems
 export const getPedidosByClienteId = async (clienteId) => {
+  if (isDemoMode()) {
+    return demoDb.getPedidosByClienteId(clienteId);
+  }
+
   const { data, error } = await supabase
     .from('pedidos')
     .select(`
@@ -72,6 +89,10 @@ export const getPedidosByClienteId = async (clienteId) => {
 
 // Obtener todos los clientes
 export const getAllClientes = async () => {
+  if (isDemoMode()) {
+    return demoDb.getClientes();
+  }
+
   const { data, error } = await supabase
     .from('clientes')
     .select('*')
@@ -80,3 +101,4 @@ export const getAllClientes = async () => {
   if (error) throw error;
   return data;
 };
+

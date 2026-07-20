@@ -15,6 +15,7 @@ import DashboardProveedores from './pages/DashboardProveedores';
 import DashboardLiquidez from './pages/DashboardLiquidez';
 import VentasHome from './pages/VentasHome';
 import Facturacion from './pages/Facturacion';
+import RubroSelector from './pages/RubroSelector';
 import { ActivityProvider } from './context/ActivityContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
@@ -40,19 +41,20 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   return children;
 };
 
-// Componente para manejar la redirección post-login
-const LoginRedirect = () => {
+// Componente para manejar la redirección post-login/ingreso a demo
+const RubroOrHome = () => {
   const { user, role } = useAuth();
   
   if (user) {
     if (role === 'ventas') {
       return <Navigate to="/ventas-home" replace />;
     }
-    return <Navigate to="/market" replace />; // POS por defecto para admin
+    return <Navigate to="/market" replace />; // POS por defecto para admin/demo
   }
   
-  return <Login />;
+  return <RubroSelector />;
 };
+
 
 function App() {
   return (
@@ -60,8 +62,11 @@ function App() {
       <ActivityProvider>
         <Router>
           <Routes>
-            {/* Ruta Pública (Login) */}
-            <Route path="/" element={<LoginRedirect />} />
+            {/* Ruta Principal (Selector de rubros / Home) */}
+            <Route path="/" element={<RubroOrHome />} />
+
+            {/* Acceso administrativo manual */}
+            <Route path="/login" element={<Login />} />
             
             {/* Ruta Pública de Promociones */}
             <Route path="/promociones" element={<PromocionesPublicas />} />

@@ -1,9 +1,14 @@
 import { supabase } from './supabaseClient';
+import { isDemoMode, demoDb } from './demoService';
 
 // ==========================================
 // MÓDULO: PROVEEDORES
 // ==========================================
 export const getProveedores = async () => {
+  if (isDemoMode()) {
+    return demoDb.getProveedores();
+  }
+
   const { data, error } = await supabase
     .from('proveedores')
     .select('*')
@@ -13,6 +18,10 @@ export const getProveedores = async () => {
 };
 
 export const createProveedor = async (proveedor) => {
+  if (isDemoMode()) {
+    return demoDb.addProveedor(proveedor);
+  }
+
   const { data, error } = await supabase
     .from('proveedores')
     .insert([proveedor])
@@ -23,6 +32,10 @@ export const createProveedor = async (proveedor) => {
 };
 
 export const updateProveedor = async (id, proveedor) => {
+  if (isDemoMode()) {
+    return demoDb.updateProveedor(id, proveedor);
+  }
+
   const { data, error } = await supabase
     .from('proveedores')
     .update(proveedor)
@@ -34,6 +47,10 @@ export const updateProveedor = async (id, proveedor) => {
 };
 
 export const deleteProveedor = async (id) => {
+  if (isDemoMode()) {
+    return demoDb.deleteProveedor(id);
+  }
+
   const { error } = await supabase
     .from('proveedores')
     .delete()
@@ -46,6 +63,10 @@ export const deleteProveedor = async (id) => {
 // MÓDULO: MOVIMIENTOS FINANCIEROS
 // ==========================================
 export const registrarMovimiento = async (movimiento) => {
+  if (isDemoMode()) {
+    return demoDb.addMovimiento(movimiento);
+  }
+
   const { data, error } = await supabase
     .from('movimientos_financieros')
     .insert([movimiento])
@@ -56,6 +77,10 @@ export const registrarMovimiento = async (movimiento) => {
 };
 
 export const getMovimientos = async () => {
+  if (isDemoMode()) {
+    return demoDb.getMovimientos();
+  }
+
   const { data, error } = await supabase
     .from('movimientos_financieros')
     .select('*')
@@ -65,7 +90,17 @@ export const getMovimientos = async () => {
 };
 
 export const getIngresosY_Egresos = async () => {
-  // Optimizada para el Dashboard
+  if (isDemoMode()) {
+    const data = await demoDb.getMovimientos();
+    let ingresos = 0;
+    let egresos = 0;
+    data.forEach(item => {
+      if (item.tipo === 'INGRESO') ingresos += Number(item.monto);
+      if (item.tipo === 'EGRESO') egresos += Number(item.monto);
+    });
+    return { ingresos, egresos, liquidez: ingresos - egresos };
+  }
+
   const { data, error } = await supabase
     .from('movimientos_financieros')
     .select('tipo, monto');
@@ -85,6 +120,10 @@ export const getIngresosY_Egresos = async () => {
 // MÓDULO: COMPRAS (REPOSICIÓN)
 // ==========================================
 export const getCompras = async () => {
+  if (isDemoMode()) {
+    return demoDb.getCompras();
+  }
+
   const { data, error } = await supabase
     .from('compras')
     .select(`
@@ -97,6 +136,25 @@ export const getCompras = async () => {
 };
 
 export const getComprasDetalle = async () => {
+  if (isDemoMode()) {
+    // Simular detalle vacío o básico para compras demo
+    const compras = await demoDb.getCompras();
+    const details = [];
+    compras.forEach(c => {
+      details.push({
+        id: 'det-' + c.id,
+        compra_id: c.id,
+        producto_id: 'item-1',
+        cantidad: 10,
+        precio_unitario: c.importe / 10,
+        subtotal: c.importe,
+        created_at: c.created_at,
+        compras: { fecha: c.fecha, estado: c.estado }
+      });
+    });
+    return details;
+  }
+
   const { data, error } = await supabase
     .from('compras_detalle')
     .select(`
@@ -109,6 +167,10 @@ export const getComprasDetalle = async () => {
 };
 
 export const registrarCompraCompleta = async (compraData, items, usuario_auditoria) => {
+  if (isDemoMode()) {
+    return demoDb.addCompra(compraData, items, usuario_auditoria);
+  }
+
   // 1. Insertar en tabla `compras`
   const { data: compra, error: compraError } = await supabase
     .from('compras')
@@ -130,7 +192,7 @@ export const registrarCompraCompleta = async (compraData, items, usuario_auditor
   const { error: detallesError } = await supabase
     .from('compras_detalle')
     .insert(detalles);
-
+  
   if (detallesError) throw detallesError;
 
   // 3. Registrar el Egreso Financiero
@@ -145,7 +207,6 @@ export const registrarCompraCompleta = async (compraData, items, usuario_auditor
 
   // 4. Actualizar Stock en Inventario
   for (const item of items) {
-    // Buscar cantidad actual
     const { data: invItem } = await supabase.from('inventario').select('cantidad').eq('id', item.producto_id).single();
     if (invItem) {
       await supabase.from('inventario').update({
@@ -161,6 +222,10 @@ export const registrarCompraCompleta = async (compraData, items, usuario_auditor
 // MÓDULO: GASTOS (OPERATIVOS)
 // ==========================================
 export const getGastos = async () => {
+  if (isDemoMode()) {
+    return demoDb.getGastos();
+  }
+
   const { data, error } = await supabase
     .from('gastos')
     .select('*')
@@ -170,6 +235,10 @@ export const getGastos = async () => {
 };
 
 export const registrarGasto = async (gasto, usuario_auditoria) => {
+  if (isDemoMode()) {
+    return demoDb.addGasto(gasto, usuario_auditoria);
+  }
+
   // 1. Insertar en tabla `gastos`
   const { data: nuevoGasto, error: gastoError } = await supabase
     .from('gastos')
@@ -183,7 +252,7 @@ export const registrarGasto = async (gasto, usuario_auditoria) => {
   await registrarMovimiento({
     tipo: 'EGRESO',
     monto: nuevoGasto.importe,
-    categoria: nuevoGasto.categoria_principal, // 'Costos Fijos', 'Depreciación de Capital', 'Salario / Ganancia'
+    categoria: nuevoGasto.categoria_principal,
     origen_id: nuevoGasto.id,
     descripcion: nuevoGasto.rubro,
     usuario_auditoria

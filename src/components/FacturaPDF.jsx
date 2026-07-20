@@ -183,11 +183,74 @@ const EMISOR_DEFAULT = {
   telefono: '11 4567-8901',
 };
 
+const getEmisorDemo = () => {
+  const isDemo = localStorage.getItem('argentum_demo_mode') === 'true';
+  if (!isDemo) return EMISOR_DEFAULT;
+
+  const rubro = localStorage.getItem('argentum_rubro') || 'carniceria';
+  const emisores = {
+    'pet-shop': {
+      nombre: 'ARGENTUM PET SHOP',
+      eslogan: 'TODO PARA TU MASCOTA',
+      domicilio: 'Calle de los Perros 456, CABA',
+      cuit: '30-79998888-1',
+      condicionIVA: 'Responsable Inscripto',
+      inicioActividades: '10/05/2023',
+      ingBrutos: '30-79998888-1',
+      telefono: '11 5555-8888',
+    },
+    'panaderia': {
+      nombre: 'ARGENTUM PANADERÍA',
+      eslogan: 'EL SABOR DE LO ARTESANAL',
+      domicilio: 'Av. del Trigo 789, Buenos Aires',
+      cuit: '30-78887777-2',
+      condicionIVA: 'Responsable Inscripto',
+      inicioActividades: '12/03/2021',
+      ingBrutos: '30-78887777-2',
+      telefono: '11 4444-5555',
+    },
+    'mini-mercado': {
+      nombre: 'ARGENTUM MINI-MERCADO',
+      eslogan: 'TU COMPRA DIARIA',
+      domicilio: 'Av. San Martín 1500, Córdoba',
+      cuit: '30-76665555-3',
+      condicionIVA: 'Responsable Inscripto',
+      inicioActividades: '01/01/2020',
+      ingBrutos: '30-76665555-3',
+      telefono: '351 488-9900',
+    },
+    'dietetica': {
+      nombre: 'ARGENTUM DIETÉTICA',
+      eslogan: 'VIDA SALUDABLE',
+      domicilio: 'Calle Verde 123, Rosario',
+      cuit: '30-75554444-4',
+      condicionIVA: 'Responsable Inscripto',
+      inicioActividades: '15/08/2022',
+      ingBrutos: '30-75554444-4',
+      telefono: '341 456-7890',
+    },
+    'fiambreria': {
+      nombre: 'ARGENTUM FIAMBRERÍA',
+      eslogan: 'LOS MEJORES FIAMBRES',
+      domicilio: 'Av. Tandil 987, Mar del Plata',
+      cuit: '30-74443333-5',
+      condicionIVA: 'Responsable Inscripto',
+      inicioActividades: '20/11/2019',
+      ingBrutos: '30-74443333-5',
+      telefono: '223 487-6543',
+    },
+    'carniceria': EMISOR_DEFAULT
+  };
+
+  return emisores[rubro] || EMISOR_DEFAULT;
+};
+
 export const FacturaPDF = ({
   factura,
   qrCodeBase64,
-  emisor = EMISOR_DEFAULT,
+  emisor: propsEmisor,
 }) => {
+  const emisor = propsEmisor || getEmisorDemo();
   const tipoInfo = TIPO_LETRA[factura.tipo_cbte] ?? { letra: 'B', codigo: '006' };
   const nroCbte = String(factura.nro_cbte ?? 0).padStart(8, '0');
   const ptoVta = String(factura.punto_venta ?? 1).padStart(5, '0');

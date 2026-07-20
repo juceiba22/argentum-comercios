@@ -1,9 +1,14 @@
 import { supabase } from './supabaseClient';
+import { isDemoMode, demoDb } from './demoService';
 
 /**
  * Obtiene la sesión de caja abierta para un usuario determinado
  */
 export const getCajaAbierta = async (usuarioEmail) => {
+  if (isDemoMode()) {
+    return demoDb.getCajaAbierta(usuarioEmail);
+  }
+
   const { data, error } = await supabase
     .from('sesiones_caja')
     .select('*')
@@ -25,6 +30,10 @@ export const getCajaAbierta = async (usuarioEmail) => {
  * Abre una nueva sesión de caja
  */
 export const abrirCaja = async (usuarioEmail, saldoInicial = 0) => {
+  if (isDemoMode()) {
+    return demoDb.abrirCaja(usuarioEmail, saldoInicial);
+  }
+
   // Verificar si ya hay una abierta
   const cajaExistente = await getCajaAbierta(usuarioEmail);
   if (cajaExistente) {
@@ -51,6 +60,10 @@ export const abrirCaja = async (usuarioEmail, saldoInicial = 0) => {
  * Cierra una sesión de caja
  */
 export const cerrarCaja = async (cajaId) => {
+  if (isDemoMode()) {
+    return demoDb.cerrarCaja(cajaId);
+  }
+
   const { data, error } = await supabase
     .from('sesiones_caja')
     .update({ 
@@ -64,3 +77,4 @@ export const cerrarCaja = async (cajaId) => {
   if (error) throw error;
   return data;
 };
+
