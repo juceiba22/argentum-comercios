@@ -15,7 +15,7 @@ import DashboardProveedores from './pages/DashboardProveedores';
 import DashboardLiquidez from './pages/DashboardLiquidez';
 import VentasHome from './pages/VentasHome';
 import Facturacion from './pages/Facturacion';
-import RubroSelector from './pages/RubroSelector';
+import LandingPage from './pages/LandingPage';
 import { ActivityProvider } from './context/ActivityContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
@@ -52,7 +52,7 @@ const RubroOrHome = () => {
     return <Navigate to="/market" replace />; // POS por defecto para admin/demo
   }
   
-  return <RubroSelector />;
+  return <LandingPage />;
 };
 
 

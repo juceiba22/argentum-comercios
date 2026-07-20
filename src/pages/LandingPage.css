@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;600;700;800&display=swap');
+
+.landing-container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #F8FAFC;
+  font-family: 'Lato', sans-serif;
+  color: #0f172a;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Tipografías */
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-sans {
+  font-family: 'Lato', sans-serif;
+}
+
+/* HERO SECTION */
+.hero-section {
+  padding: 100px 24px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-kicker {
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #2563EB;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #0f172a;
+  margin-bottom: 24px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #475569;
+  max-width: 760px;
+  margin: 0 auto 40px;
+}
+
+.hero-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background-color: #2563EB;
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #2563EB;
+  border: 2px solid #e2e8f0;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: #2563EB;
+  background-color: rgba(37, 99, 235, 0.03);
+  transform: translateY(-2px);
+}
+
+/* SECCIÓN DOLORES & SOLUCIONES */
+.soluciones-section {
+  padding: 80px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.soluciones-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 48px;
+  color: #0f172a;
+}
+
+.soluciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.solucion-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 16px;
+  padding: 40px 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.solucion-card:hover {
+  transform: translateY(-6px);
+  border-color: #38BDF8;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+}
+
+.solucion-icon {
+  margin-bottom: 24px;
+  display: inline-block;
+  padding: 12px;
+  background-color: rgba(56, 189, 248, 0.08);
+  border-radius: 12px;
+  color: #2563EB;
+}
+
+.solucion-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.solucion-desc {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* SECCIÓN SELECTOR DE RUBROS */
+.selector-section {
+  padding: 80px 24px 100px;
+  background-color: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.selector-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.selector-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.selector-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #0f172a;
+}
+
+.selector-subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.rubro-card-page {
+  background-color: #F8FAFC;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.2s ease;
+}
+
+.rubro-card-page:hover {
+  transform: translateY(-6px);
+  border-color: #38BDF8;
+  background-color: #ffffff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+}
+
+.rubro-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justifyContent: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.rubro-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+.rubro-desc {
+  font-size: 0.92rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.rubro-btn-demo {
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: flex-end;
+}
+
+/* FOOTER */
+.landing-footer {
+  padding: 40px 24px;
+  background-color: #F8FAFC;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-copy {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer-link-login {
+  font-size: 0.9rem;
+  color: #2563EB;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.footer-link-login:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-section {
+    padding: 60px 16px 50px;
+  }
+  .soluciones-title, .selector-title {
+    font-size: 1.8rem;
+  }
+}
