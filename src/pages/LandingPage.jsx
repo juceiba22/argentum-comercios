@@ -101,10 +101,10 @@ export default function LandingPage() {
       <section className="hero-section">
         <span className="hero-kicker font-sans">DIGITALIZACIÓN INTELIGENTE PARA PYMES</span>
         <h1 className="hero-title font-serif">
-          La administración de tu comercio, simplificada y con validez fiscal.
+          Digitalizá tu comercio y lleva la contabilidad de tu comercio de manera simple y ultra-barata
         </h1>
         <p className="hero-subtitle font-sans">
-          Argentum-Comercios fusiona el control de tu inventario, un Punto de Venta ágil y la emisión directa de facturas ante ARCA (ex AFIP) en una sola plataforma minimalista. Reducí costos contables sin perder el control.
+          Argentum fusiona el control de tu inventario, el cobro por medio de posnets y la emisión directa de facturas ante ARCA (ex AFIP) en una sola plataforma minimalista. Digitalizá y reducí costos contables sin perder el control.
         </p>
         <div className="hero-ctas">
           <button 
