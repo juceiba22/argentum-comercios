@@ -104,7 +104,7 @@ export default function LandingPage() {
           Digitalizá tu comercio y lleva la contabilidad al día de manera simple y ultra-barata
         </h1>
         <p className="hero-subtitle font-sans">
-          Argentum fusiona el control de tu inventario, el cobro por medio de posnets y la emisión directa de facturas ante ARCA (ex AFIP) en una sola plataforma minimalista. Digitalizá y reducí costos contables sin perder el control.
+          Argentum fusiona el control de tu inventario, el cobro digital y la emisión directa de facturas ante ARCA (ex AFIP) en una sola plataforma. Digitalizá y reducí costos contables sin perder el control.
         </p>
         <div className="hero-ctas">
           <button 
