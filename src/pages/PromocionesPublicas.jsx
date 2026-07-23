@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getPromocionesActivas } from '../services/promocionesApi';
 import { registrarPedidoWeb } from '../services/pedidosApi';
 import { Tag, ShoppingCart, Plus, Minus, X, CheckCircle, Info } from 'lucide-react';
+import { handleImageError } from '../services/imageHelper';
 
 export default function PromocionesPublicas() {
   const [promociones, setPromociones] = useState([]);
@@ -173,6 +174,7 @@ export default function PromocionesPublicas() {
                       <img 
                         src={promo.imagen_url} 
                         alt={promo.nombre_producto} 
+                        onError={handleImageError}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       />
                     ) : (

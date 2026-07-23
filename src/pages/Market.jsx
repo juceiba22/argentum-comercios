@@ -8,6 +8,7 @@ import { cobrarConPoint, getPaymentIntentStatus, cancelarPointPayment } from '..
 import { getCajaAbierta, abrirCaja } from '../services/cajasApi';
 import { useAuth } from '../context/AuthContext';
 import { useLocation } from 'react-router-dom';
+import { handleImageError } from '../services/imageHelper';
 
 export default function Market() {
   const [productos, setProductos] = useState([]);
@@ -497,6 +498,7 @@ export default function Market() {
                         <img 
                           src={promo.imagen_url} 
                           alt={promo.nombre_producto} 
+                          onError={handleImageError}
                           style={{ width: '90px', height: '90px', objectFit: 'cover', borderRadius: '50%', marginBottom: '16px', marginTop: '24px', border: '3px solid rgba(255,255,255,0.1)' }} 
                         />
                       ) : (
@@ -543,6 +545,7 @@ export default function Market() {
                       <img 
                         src={producto.imagen_url} 
                         alt={producto.nombre} 
+                        onError={handleImageError}
                         style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%', marginBottom: '16px', border: '3px solid rgba(255,255,255,0.05)' }} 
                       />
                     ) : (

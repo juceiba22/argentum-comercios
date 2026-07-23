@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PackageSearch, Plus, Trash2, Edit2, Check, X, AlertCircle, TrendingUp } from 'lucide-react';
 import { getInventario, addMercaderia, updateMercaderia, deleteMercaderia, uploadImage } from '../services/inventarioApi';
+import { handleImageError } from '../services/imageHelper';
 
 const UNIDADES_MEDIDA = ['kg', 'gramos', 'unidades', 'paquetes', 'litros'];
 
@@ -228,7 +229,7 @@ export default function Inventario() {
                             </div>
                           ) : (
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                              {item.imagen_url && <img src={item.imagen_url} alt={item.nombre} style={{ width: '32px', height: '32px', objectFit: 'cover', borderRadius: '4px' }} />}
+                              {item.imagen_url && <img src={item.imagen_url} alt={item.nombre} onError={handleImageError} style={{ width: '32px', height: '32px', objectFit: 'cover', borderRadius: '4px' }} />}
                               {item.nombre}
                             </div>
                           )}

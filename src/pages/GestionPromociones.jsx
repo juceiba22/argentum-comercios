@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Megaphone, Plus, Trash2, Check, X, Tag, Power, PowerOff } from 'lucide-react';
 import { getInventario, uploadImage } from '../services/inventarioApi';
 import { getAllPromociones, createPromocion, deletePromocion, updatePromocion } from '../services/promocionesApi';
+import { handleImageError } from '../services/imageHelper';
 
 export default function GestionPromociones() {
   const [promociones, setPromociones] = useState([]);
@@ -177,7 +178,7 @@ export default function GestionPromociones() {
                     <tr key={promo.id} style={{ borderBottom: '1px solid var(--glass-border)', opacity: promo.activa ? 1 : 0.5 }}>
                       <td style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         {promo.imagen_url ? (
-                          <img src={promo.imagen_url} alt={promo.nombre_producto} style={{ width: '40px', height: '40px', borderRadius: '8px', objectFit: 'cover' }} />
+                          <img src={promo.imagen_url} alt={promo.nombre_producto} onError={handleImageError} style={{ width: '40px', height: '40px', borderRadius: '8px', objectFit: 'cover' }} />
                         ) : (
                           <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <Tag size={20} />
