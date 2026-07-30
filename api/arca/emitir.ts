@@ -1,13 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
-import { getAfipClient } from './afip-client.js';
-import { mockEmitirFactura } from './mock.js';
+import { getAfipClient } from './_afip-client.js';
+import { mockEmitirFactura } from './_mock.js';
 import {
   ALICUOTA_IVA,
   ALICUOTA_PORCENTAJE,
   TIPO_COMPROBANTE,
   calcularDesgloseIVA,
   type EmitirFacturaPayload
-} from './types.js';
+} from './_types.js';
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';

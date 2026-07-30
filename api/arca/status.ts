@@ -1,6 +1,6 @@
-import { getAfipClient } from './afip-client.js';
-import { mockVerificarConexionARCA } from './mock.js';
-import type { ARCAServerStatus } from './types.js';
+import { getAfipClient } from './_afip-client.js';
+import { mockVerificarConexionARCA } from './_mock.js';
+import type { ARCAServerStatus } from './_types.js';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'GET') {
