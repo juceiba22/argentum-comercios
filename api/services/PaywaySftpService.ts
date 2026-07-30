@@ -59,7 +59,7 @@ export class PaywaySftpService {
    */
   public async syncLatestTransactions(): Promise<{ success: boolean; processed: number; error?: string }> {
     try {
-      const config = {
+      const config: any = {
         host: process.env.PAYWAY_SFTP_HOST,
         port: parseInt(process.env.PAYWAY_SFTP_PORT || '22', 10),
         username: process.env.PAYWAY_SFTP_USER,
