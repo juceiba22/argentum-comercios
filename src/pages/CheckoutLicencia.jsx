@@ -45,7 +45,7 @@ export default function CheckoutLicencia() {
         body: JSON.stringify({
           email: email,
           planName: 'Plan Profesional',
-          price: 25000,
+          price: 150,
         }),
       });
 
@@ -88,7 +88,7 @@ export default function CheckoutLicencia() {
             Plan Profesional
           </h1>
           <p style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--primary)', marginBottom: '40px', display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-            $25.000 <span style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', fontWeight: 'normal' }}>ARS / único pago</span>
+            $150 <span style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', fontWeight: 'normal' }}>ARS / único pago</span>
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
@@ -150,11 +150,11 @@ export default function CheckoutLicencia() {
             <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '24px', marginBottom: '32px' }}>
               <div className="font-sans" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', color: 'var(--text-main)' }}>
                 <span>Subtotal</span>
-                <span>$25.000</span>
+                <span>$150</span>
               </div>
               <div className="font-sans" style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '1.25rem', color: 'var(--text-main)' }}>
                 <span>Total</span>
-                <span>$25.000</span>
+                <span>$150</span>
               </div>
             </div>
 
@@ -178,7 +178,7 @@ export default function CheckoutLicencia() {
               }} 
               disabled={loading}
             >
-              {loading ? 'Iniciando pago...' : 'Confirmar y pagar $25.000'}
+              {loading ? 'Iniciando pago...' : 'Confirmar y pagar $150'}
             </button>
 
             <div className="font-sans" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '20px', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>

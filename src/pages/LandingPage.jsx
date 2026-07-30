@@ -137,7 +137,7 @@ export default function LandingPage() {
             style={{ backgroundColor: '#10B981', borderColor: '#10B981', color: '#fff' }}
             onClick={() => navigate('/checkout')}
           >
-            Comprar Licencia ($25.000)
+            Comprar Licencia ($150)
           </button>
           <button 
             className="btn-primary" 
