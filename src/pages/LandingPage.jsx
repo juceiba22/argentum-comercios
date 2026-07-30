@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Dog, ShoppingBag, Store, Leaf, Beef, Shield, CreditCard, TrendingDown, ChevronRight, Apple, Wrench, Briefcase } from 'lucide-react';
 import { initializeDemoDatabase } from '../services/demoService';
@@ -100,40 +100,6 @@ const RUBROS = [
 
 export default function LandingPage() {
   const navigate = useNavigate();
-  const [comprando, setComprando] = useState(false);
-
-  const handleComprarLicencia = async () => {
-    const email = prompt('Por favor, ingresá tu email para continuar con la compra:');
-    if (!email) return;
-
-    setComprando(true);
-    try {
-      const response = await fetch('/api/mercadopago/create-preference', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          planName: 'Plan Profesional',
-          price: 25000,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.success && data.init_point) {
-        window.location.href = data.init_point;
-      } else {
-        alert('Error al iniciar el pago: ' + (data.error || 'Intente nuevamente.'));
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error de conexión. Por favor intente nuevamente.');
-    } finally {
-      setComprando(false);
-    }
-  };
 
   const handleSelectDemo = (rubroId) => {
     localStorage.setItem('argentum_demo_mode', 'true');
@@ -169,10 +135,9 @@ export default function LandingPage() {
           <button 
             className="btn-primary" 
             style={{ backgroundColor: '#10B981', borderColor: '#10B981', color: '#fff' }}
-            onClick={handleComprarLicencia}
-            disabled={comprando}
+            onClick={() => navigate('/checkout')}
           >
-            {comprando ? 'Iniciando pago...' : 'Comprar Licencia ($25.000)'}
+            Comprar Licencia ($25.000)
           </button>
           <button 
             className="btn-primary" 

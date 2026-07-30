@@ -16,6 +16,10 @@ import DashboardLiquidez from './pages/DashboardLiquidez';
 import VentasHome from './pages/VentasHome';
 import Facturacion from './pages/Facturacion';
 import LandingPage from './pages/LandingPage';
+import CheckoutLicencia from './pages/CheckoutLicencia';
+import CheckoutSuccess from './pages/checkout/CheckoutSuccess';
+import CheckoutFailure from './pages/checkout/CheckoutFailure';
+import CheckoutPending from './pages/checkout/CheckoutPending';
 import { ActivityProvider } from './context/ActivityContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
@@ -67,6 +71,12 @@ function App() {
 
             {/* Acceso administrativo manual */}
             <Route path="/login" element={<Login />} />
+            
+            {/* Checkout Público */}
+            <Route path="/checkout" element={<CheckoutLicencia />} />
+            <Route path="/checkout/success" element={<CheckoutSuccess />} />
+            <Route path="/checkout/failure" element={<CheckoutFailure />} />
+            <Route path="/checkout/pending" element={<CheckoutPending />} />
             
             {/* Ruta Pública de Promociones */}
             <Route path="/promociones" element={<PromocionesPublicas />} />
