@@ -52,7 +52,7 @@ export default async function handler(req, res) {
 
     if (dbError) {
       console.error('Error insertando en Supabase:', dbError);
-      throw new Error('Error al registrar el intento de pago en la base de datos');
+      throw new Error(`DB Error: ${dbError.message || dbError.details || JSON.stringify(dbError)}`);
     }
 
     // Configurar el dominio base dinámicamente usando el header origin, u obtenerlo de variables de entorno
