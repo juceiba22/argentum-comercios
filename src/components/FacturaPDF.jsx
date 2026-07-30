@@ -239,6 +239,26 @@ const getEmisorDemo = () => {
       ingBrutos: '30-74443333-5',
       telefono: '223 487-6543',
     },
+    'verduleria': {
+      nombre: 'ARGENTUM VERDULERÍA',
+      eslogan: 'FRESCO Y NATURAL',
+      domicilio: 'Av. del Campo 321, Mendoza',
+      cuit: '30-73332222-6',
+      condicionIVA: 'Responsable Inscripto',
+      inicioActividades: '15/09/2022',
+      ingBrutos: '30-73332222-6',
+      telefono: '261 455-6677',
+    },
+    'ferreteria': {
+      nombre: 'ARGENTUM FERRETERÍA',
+      eslogan: 'SOLUCIONES PARA TU HOGAR',
+      domicilio: 'Calle de las Herramientas 123, CABA',
+      cuit: '30-72221111-7',
+      condicionIVA: 'Responsable Inscripto',
+      inicioActividades: '01/04/2021',
+      ingBrutos: '30-72221111-7',
+      telefono: '11 5432-1098',
+    },
     'carniceria': EMISOR_DEFAULT
   };
 

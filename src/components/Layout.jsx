@@ -28,7 +28,9 @@ export default function Layout() {
     'mini-mercado': 'Mini-mercado 🏪',
     'dietetica': 'Dietética 🌿',
     'fiambreria': 'Fiambrería 🥪',
-    'carniceria': 'Carnicería 🥩'
+    'carniceria': 'Carnicería 🥩',
+    'verduleria': 'Verdulería 🍏',
+    'ferreteria': 'Ferretería 🔧'
   };
 
   const navItems = [

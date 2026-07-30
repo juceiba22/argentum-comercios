@@ -27,6 +27,14 @@ const getMockPromociones = () => {
     'carniceria': [
       { id: 'p1', titulo: 'Finde de Asado', descripcion: '15% de descuento llevando más de 3kg de Asado de Tira.', activa: true, descuento_porcentaje: 15 },
       { id: 'p2', titulo: 'Milas Express', descripcion: '10% OFF en Milanesa de Nalga de Martes a Jueves.', activa: true, descuento_porcentaje: 10 }
+    ],
+    'verduleria': [
+      { id: 'p1', titulo: 'Feria del Tomate', descripcion: '20% de descuento llevando más de 2kg de Tomate Redondo.', activa: true, descuento_porcentaje: 20 },
+      { id: 'p2', titulo: 'Combo Ensalada', descripcion: 'Llevando 1kg de lechuga, te llevas 1kg de papas con 30% de descuento.', activa: true, descuento_porcentaje: 15 }
+    ],
+    'ferreteria': [
+      { id: 'p1', titulo: 'Semana de Herramientas', descripcion: '15% de descuento en taladros y herramientas eléctricas Dowen Pagio.', activa: true, descuento_porcentaje: 15 },
+      { id: 'p2', titulo: 'Kit Ajuste', descripcion: 'Llevando un martillo, obtienes 10% de descuento en destornilladores.', activa: true, descuento_porcentaje: 10 }
     ]
   };
 

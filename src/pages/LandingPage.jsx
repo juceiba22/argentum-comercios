@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Dog, ShoppingBag, Store, Leaf, Beef, Shield, CreditCard, TrendingDown, ChevronRight } from 'lucide-react';
+import { Dog, ShoppingBag, Store, Leaf, Beef, Shield, CreditCard, TrendingDown, ChevronRight, Apple, Wrench } from 'lucide-react';
 import { initializeDemoDatabase } from '../services/demoService';
 import './LandingPage.css';
 
@@ -70,6 +70,22 @@ const RUBROS = [
     icon: Beef,
     color: '#DC2626',
     bgLight: 'rgba(220, 38, 38, 0.08)'
+  },
+  {
+    id: 'verduleria',
+    nombre: 'Verdulería',
+    descripcion: 'Frutas de estación, verduras frescas, hortalizas y productos de granja.',
+    icon: Apple,
+    color: '#84CC16', // Limón / Verde brillante
+    bgLight: 'rgba(132, 204, 22, 0.08)'
+  },
+  {
+    id: 'ferreteria',
+    nombre: 'Ferretería',
+    descripcion: 'Herramientas manuales y eléctricas, tornillería, cerrajería y electricidad.',
+    icon: Wrench,
+    color: '#475569', // Pizarra / Gris metalizado
+    bgLight: 'rgba(71, 85, 105, 0.08)'
   }
 ];
 

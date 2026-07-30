@@ -163,6 +163,54 @@ const SEED_DATA = {
     pedidos: [
       { id: 'ped-1', cliente_id: 'c-1', total: 18700, estado: 'Entregado', created_at: '2026-07-19T12:00:00Z', doc_tipo: 99, doc_nro: '0', condicion_iva: 'CF' }
     ]
+  },
+  'verduleria': {
+    inventario: [
+      { id: 'verd-1', nombre: 'Tomate Redondo (kg)', cantidad: 100, unidad_medida: 'kg', precio_unitario: 1500, imagen_url: 'https://images.unsplash.com/photo-1595855759920-86582396756a?w=150&auto=format&fit=crop&q=60' },
+      { id: 'verd-2', nombre: 'Lechuga Capuchina (kg)', cantidad: 50, unidad_medida: 'kg', precio_unitario: 1200, imagen_url: 'https://images.unsplash.com/photo-1556801712-76c8eb07bbc9?w=150&auto=format&fit=crop&q=60' },
+      { id: 'verd-3', nombre: 'Bananas Ecuador (kg)', cantidad: 80, unidad_medida: 'kg', precio_unitario: 1800, imagen_url: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=150&auto=format&fit=crop&q=60' },
+      { id: 'verd-4', nombre: 'Manzanas Rojas (kg)', cantidad: 70, unidad_medida: 'kg', precio_unitario: 2200, imagen_url: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=150&auto=format&fit=crop&q=60' },
+      { id: 'verd-5', nombre: 'Papas Cepilladas (kg)', cantidad: 200, unidad_medida: 'kg', precio_unitario: 800, imagen_url: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=150&auto=format&fit=crop&q=60' }
+    ],
+    clientes: [
+      { id: 'c-1', nombre: 'Norma Ruiz', email: 'norma.ruiz@gmail.com', telefono: '1143219876', cuit: '27156789012', doc_tipo: 96, doc_nro: '15678901', condicion_iva: 'CF' }
+    ],
+    proveedores: [
+      { id: 'p-1', nombre: 'Cooperativa Mercado Central', email: 'ventas@mercadocentral.com', telefono: '1133334444', cuit: '30444555667', condicion_iva: 'RI' }
+    ],
+    gastos: [
+      { id: 'g-1', rubro: 'Electricidad (Heladeras de exhibición)', importe: 35000, fecha: '2026-07-04', categoria_principal: 'Costos Fijos', descripcion: 'Luz Julio' }
+    ],
+    compras: [
+      { id: 'comp-1', proveedor_id: 'p-1', importe: 120000, fecha: '2026-07-06', estado: 'Pagada', created_at: '2026-07-06T10:00:00Z' }
+    ],
+    pedidos: [
+      { id: 'ped-1', cliente_id: 'c-1', total: 4700, estado: 'Entregado', created_at: '2026-07-20T11:30:00Z', doc_tipo: 99, doc_nro: '0', condicion_iva: 'CF' }
+    ]
+  },
+  'ferreteria': {
+    inventario: [
+      { id: 'ferr-1', nombre: 'Martillo Galponero Stanley', cantidad: 15, unidad_medida: 'unidades', precio_unitario: 14500, imagen_url: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=150&auto=format&fit=crop&q=60' },
+      { id: 'ferr-2', nombre: 'Destornillador Phillips 1/4x4', cantidad: 30, unidad_medida: 'unidades', precio_unitario: 3200, imagen_url: 'https://images.unsplash.com/photo-1530124560072-aee707f1f7b5?w=150&auto=format&fit=crop&q=60' },
+      { id: 'ferr-3', nombre: 'Cinta Métrica 5m Stanley', cantidad: 25, unidad_medida: 'unidades', precio_unitario: 6800, imagen_url: 'https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8?w=150&auto=format&fit=crop&q=60' },
+      { id: 'ferr-4', nombre: 'Caja de Clavos de 2 pulgadas (kg)', cantidad: 40, unidad_medida: 'kg', precio_unitario: 4500, imagen_url: 'https://images.unsplash.com/photo-1590502593747-42a996133562?w=150&auto=format&fit=crop&q=60' },
+      { id: 'ferr-5', nombre: 'Taladro Percutor 650W Dowen Pagio', cantidad: 5, unidad_medida: 'unidades', precio_unitario: 65000, imagen_url: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=150&auto=format&fit=crop&q=60' }
+    ],
+    clientes: [
+      { id: 'c-1', nombre: 'Héctor Construcciones', email: 'hector.const@gmail.com', telefono: '1155667788', cuit: '20233445561', doc_tipo: 80, doc_nro: '20233445561', condicion_iva: 'RI' }
+    ],
+    proveedores: [
+      { id: 'p-1', nombre: 'Ferretería Industrial Mayorista', email: 'pedidos@ferreindustrial.com', telefono: '1148887777', cuit: '30555666778', condicion_iva: 'RI' }
+    ],
+    gastos: [
+      { id: 'g-1', rubro: 'Alquiler de local comercial', importe: 160000, fecha: '2026-07-01', categoria_principal: 'Costos Fijos', descripcion: 'Alquiler Julio' }
+    ],
+    compras: [
+      { id: 'comp-1', proveedor_id: 'p-1', importe: 350000, fecha: '2026-07-05', estado: 'Pagada', created_at: '2026-07-05T09:00:00Z' }
+    ],
+    pedidos: [
+      { id: 'ped-1', cliente_id: 'c-1', total: 28100, estado: 'Entregado', created_at: '2026-07-20T16:00:00Z', doc_tipo: 80, doc_nro: '20233445561', condicion_iva: 'RI' }
+    ]
   }
 };
 
