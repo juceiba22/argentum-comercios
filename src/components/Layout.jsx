@@ -30,7 +30,8 @@ export default function Layout() {
     'fiambreria': 'Fiambrería 🥪',
     'carniceria': 'Carnicería 🥩',
     'verduleria': 'Verdulería 🍏',
-    'ferreteria': 'Ferretería 🔧'
+    'ferreteria': 'Ferretería 🔧',
+    'profesionales': 'Servicios Profesionales 💼'
   };
 
   const navItems = [

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Dog, ShoppingBag, Store, Leaf, Beef, Shield, CreditCard, TrendingDown, ChevronRight, Apple, Wrench } from 'lucide-react';
+import { Dog, ShoppingBag, Store, Leaf, Beef, Shield, CreditCard, TrendingDown, ChevronRight, Apple, Wrench, Briefcase } from 'lucide-react';
 import { initializeDemoDatabase } from '../services/demoService';
 import './LandingPage.css';
 
@@ -86,6 +86,15 @@ const RUBROS = [
     icon: Wrench,
     color: '#475569', // Pizarra / Gris metalizado
     bgLight: 'rgba(71, 85, 105, 0.08)'
+  },
+  {
+    id: 'profesionales',
+    nombre: 'Servicios Profesionales',
+    descripcion: 'Consultorios, asesoría legal, técnica, programación y abonos de servicios.',
+    icon: Briefcase,
+    color: '#06B6D4', // Celeste / Cian
+    bgLight: 'rgba(6, 182, 212, 0.08)',
+    badge: 'Nuevo'
   }
 ];
 
@@ -176,7 +185,13 @@ export default function LandingPage() {
                   key={rubro.id} 
                   className="rubro-card-page"
                   onClick={() => handleSelectDemo(rubro.id)}
+                  style={{ position: 'relative' }}
                 >
+                  {rubro.badge && (
+                    <span className="rubro-badge-new font-sans">
+                      {rubro.badge}
+                    </span>
+                  )}
                   <div className="rubro-icon-wrapper" style={{ backgroundColor: rubro.bgLight, color: rubro.color }}>
                     <Icon size={26} />
                   </div>

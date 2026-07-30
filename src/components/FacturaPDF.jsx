@@ -259,6 +259,16 @@ const getEmisorDemo = () => {
       ingBrutos: '30-72221111-7',
       telefono: '11 5432-1098',
     },
+    'profesionales': {
+      nombre: 'ARGENTUM SERVICIOS',
+      eslogan: 'ASESORÍA Y SOLUCIONES PROFESIONALES',
+      domicilio: 'Av. Libertador 4500, CABA',
+      cuit: '30-71110000-8',
+      condicionIVA: 'Responsable Inscripto',
+      inicioActividades: '10/01/2022',
+      ingBrutos: '30-71110000-8',
+      telefono: '11 4899-0011',
+    },
     'carniceria': EMISOR_DEFAULT
   };
 

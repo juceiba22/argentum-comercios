@@ -211,6 +211,29 @@ const SEED_DATA = {
     pedidos: [
       { id: 'ped-1', cliente_id: 'c-1', total: 28100, estado: 'Entregado', created_at: '2026-07-20T16:00:00Z', doc_tipo: 80, doc_nro: '20233445561', condicion_iva: 'RI' }
     ]
+  },
+  'profesionales': {
+    inventario: [
+      { id: 'prof-1', nombre: 'Consulta de Asesoramiento (Hora)', cantidad: null, unidad_medida: 'horas', precio_unitario: 12000, imagen_url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=150&auto=format&fit=crop&q=60' },
+      { id: 'prof-2', nombre: 'Abono Mensual de Soporte Técnico', cantidad: null, unidad_medida: 'unidades', precio_unitario: 45000, imagen_url: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=150&auto=format&fit=crop&q=60' },
+      { id: 'prof-3', nombre: 'Servicio Técnico / Visita a Domicilio', cantidad: null, unidad_medida: 'unidades', precio_unitario: 18000, imagen_url: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=150&auto=format&fit=crop&q=60' },
+      { id: 'prof-4', nombre: 'Proyecto de Consultoría Integración ERP', cantidad: null, unidad_medida: 'unidades', precio_unitario: 350000, imagen_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&auto=format&fit=crop&q=60' }
+    ],
+    clientes: [
+      { id: 'c-1', nombre: 'Estudio Asociado Pérez', email: 'contacto@estudioperez.com', telefono: '1122223333', cuit: '30718889991', doc_tipo: 80, doc_nro: '30718889991', condicion_iva: 'RI' }
+    ],
+    proveedores: [
+      { id: 'p-1', nombre: 'Suscripciones y Licencias Cloud', email: 'licencias@cloudcorp.com', telefono: '0810-555-4321', cuit: '33700011129', condicion_iva: 'RI' }
+    ],
+    gastos: [
+      { id: 'g-1', rubro: 'Internet y Licencias de Software', importe: 28000, fecha: '2026-07-03', categoria_principal: 'Costos Fijos', descripcion: 'Suscripciones Julio' }
+    ],
+    compras: [
+      { id: 'comp-1', proveedor_id: 'p-1', importe: 95000, fecha: '2026-07-05', estado: 'Pagada', created_at: '2026-07-05T10:00:00Z' }
+    ],
+    pedidos: [
+      { id: 'ped-1', cliente_id: 'c-1', total: 57000, estado: 'Entregado', created_at: '2026-07-22T14:20:00Z', doc_tipo: 80, doc_nro: '30718889991', condicion_iva: 'RI' }
+    ]
   }
 };
 
@@ -462,14 +485,16 @@ export const demoDb = {
       usuario_auditoria: user
     });
 
-    const inventario = getList('inventario');
-    items.forEach(item => {
-      const prod = inventario.find(i => i.id === item.id || i.id === item.producto_id);
-      if (prod) {
-        prod.cantidad = Math.max(0, Number(prod.cantidad) - Number(item.cantidad));
-      }
-    });
-    saveList('inventario', inventario);
+    if (getDemoRubro() !== 'profesionales') {
+      const inventario = getList('inventario');
+      items.forEach(item => {
+        const prod = inventario.find(i => i.id === item.id || i.id === item.producto_id);
+        if (prod) {
+          prod.cantidad = Math.max(0, Number(prod.cantidad) - Number(item.cantidad));
+        }
+      });
+      saveList('inventario', inventario);
+    }
 
     return newPedido;
   },

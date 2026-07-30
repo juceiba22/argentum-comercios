@@ -9,6 +9,7 @@ import { getCajaAbierta, abrirCaja } from '../services/cajasApi';
 import { useAuth } from '../context/AuthContext';
 import { useLocation } from 'react-router-dom';
 import { handleImageError } from '../services/imageHelper';
+import { getDemoRubro } from '../services/demoService';
 
 export default function Market() {
   const [productos, setProductos] = useState([]);
@@ -287,12 +288,14 @@ export default function Market() {
 
     setProcesando(true);
     try {
-      for (const cartItem of carrito) {
-        const prodDb = productos.find(p => p.id === cartItem.itemNormalizado.id_original);
-        if (prodDb) {
-          const stockActual = Number(prodDb.cantidad);
-          const nuevaCantidad = stockActual - cartItem.cantidad;
-          await updateMercaderia(prodDb.id, { cantidad: nuevaCantidad });
+      if (getDemoRubro() !== 'profesionales') {
+        for (const cartItem of carrito) {
+          const prodDb = productos.find(p => p.id === cartItem.itemNormalizado.id_original);
+          if (prodDb) {
+            const stockActual = Number(prodDb.cantidad);
+            const nuevaCantidad = stockActual - cartItem.cantidad;
+            await updateMercaderia(prodDb.id, { cantidad: nuevaCantidad });
+          }
         }
       }
 
@@ -554,9 +557,11 @@ export default function Market() {
                       </div>
                     )}
                     <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', marginBottom: '4px' }}>{producto.nombre}</h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '8px' }}>
-                      Stock: {Number(producto.cantidad).toLocaleString()} {producto.unidad_medida}
-                    </p>
+                    {getDemoRubro() !== 'profesionales' && (
+                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '8px' }}>
+                        Stock: {Number(producto.cantidad).toLocaleString()} {producto.unidad_medida}
+                      </p>
+                    )}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--success)', fontWeight: 'bold', fontSize: '1.05rem' }}>
                       <DollarSign size={16} />
                       {Number(producto.precio_unitario).toLocaleString()} / {producto.unidad_medida}

@@ -28,7 +28,8 @@ export default function PromocionesPublicas() {
     'fiambreria': 'Argentum Fiambrería 🥪',
     'carniceria': 'Lo de Cacho Carnes 🥩',
     'verduleria': 'Argentum Verdulería 🍏',
-    'ferreteria': 'Argentum Ferretería 🔧'
+    'ferreteria': 'Argentum Ferretería 🔧',
+    'profesionales': 'Argentum Servicios 💼'
   };
 
   const rubroSubtitles = {
@@ -39,7 +40,8 @@ export default function PromocionesPublicas() {
     'fiambreria': 'Tablas de fiambres premium, quesos y encurtidos deliciosos.',
     'carniceria': 'Las mejores ofertas en cortes seleccionados para vos.',
     'verduleria': 'Las mejores ofertas en frutas y verduras frescas de estación.',
-    'ferreteria': 'Herramientas, tornillería, cerrajería y todo para tus proyectos.'
+    'ferreteria': 'Herramientas, tornillería, cerrajería y todo para tus proyectos.',
+    'profesionales': 'Servicios de consultoría, asesoría y soporte técnico especializado.'
   };
 
   const rubroAliases = {
@@ -50,7 +52,8 @@ export default function PromocionesPublicas() {
     'fiambreria': 'argentum.fiambreria',
     'carniceria': 'lodecacho.carnes',
     'verduleria': 'argentum.verduleria',
-    'ferreteria': 'argentum.ferreteria'
+    'ferreteria': 'argentum.ferreteria',
+    'profesionales': 'argentum.servicios'
   };
 
   const currentTitle = isDemo ? rubroNames[rubro] : 'Lo de Cacho Carnes';

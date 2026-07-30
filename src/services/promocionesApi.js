@@ -35,6 +35,10 @@ const getMockPromociones = () => {
     'ferreteria': [
       { id: 'p1', titulo: 'Semana de Herramientas', descripcion: '15% de descuento en taladros y herramientas eléctricas Dowen Pagio.', activa: true, descuento_porcentaje: 15 },
       { id: 'p2', titulo: 'Kit Ajuste', descripcion: 'Llevando un martillo, obtienes 10% de descuento en destornilladores.', activa: true, descuento_porcentaje: 10 }
+    ],
+    'profesionales': [
+      { id: 'p1', titulo: 'Primera Consulta', descripcion: '10% de descuento de bienvenida en tu primera hora de consulta.', activa: true, descuento_porcentaje: 10 },
+      { id: 'p2', titulo: 'Abono Corporativo', descripcion: '15% de descuento en contratos de abonos anuales contratados este mes.', activa: true, descuento_porcentaje: 15 }
     ]
   };
 
