@@ -126,7 +126,7 @@ export default function LandingPage() {
       <section className="hero-section">
         <span className="hero-kicker font-sans">DIGITALIZACIÓN INTELIGENTE PARA PYMES</span>
         <h1 className="hero-title font-serif">
-          Digitalizá tu comercio y lleva la contabilidad al día de manera simple y ultra-barata
+          Digitalizá tu comercio y lleva la contabilidad al día de manera simple y ultra-barata.
         </h1>
         <p className="hero-subtitle font-sans">
           Argentum fusiona el control de tu inventario, el cobro digital y la emisión directa de facturas ante ARCA (ex AFIP) en una sola plataforma. Digitalizá y reducí costos contables sin perder el control.
