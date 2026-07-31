@@ -35,32 +35,51 @@ export default function Layout() {
   };
 
   const navItems = [
-    { path: '/ventas-home', label: 'Inicio de Ventas', icon: <Store size={20} />, allowed: ['ventas'] },
-    { path: '/clientes', label: 'Clientes', icon: <Users size={20} />, allowed: ['admin'] },
-    { path: '/facturacion', label: 'Facturación ARCA', icon: <Receipt size={20} />, allowed: ['admin'] },
-    { path: '/market', label: 'Mercado', icon: <Store size={20} />, allowed: ['admin'] },
-    { path: '/gestion-promociones', label: 'Promociones', icon: <Megaphone size={20} />, allowed: ['admin'] },
     { 
-      label: 'Compras e Inventario', 
-      icon: <Package size={20} />, 
-      allowed: ['admin'],
+      label: 'Inicio de Ventas', 
+      icon: <Store size={20} />, 
+      allowed: ['ventas', 'admin'],
       subItems: [
-        { path: '/erp/compras', label: 'Compras', icon: <ShoppingCart size={20} />, allowed: ['admin'] },
-        { path: '/erp/proveedores', label: 'Alta Proveedores', icon: <Truck size={20} />, allowed: ['admin'] },
-        { path: '/inventario', label: 'Inventario', icon: <Package size={20} />, allowed: ['admin'] }
+        { path: '/ventas-home', label: 'Terminal de Venta', icon: <Store size={20} />, allowed: ['ventas', 'admin'] },
+        { path: '/clientes', label: 'Clientes', icon: <Users size={20} />, allowed: ['admin'] }
       ]
     },
-    { path: '/erp/dashboard-liquidez', label: 'Cash Flow (ERP)', icon: <Activity size={20} />, allowed: ['admin'] },
     { 
-      label: 'Costos (ERP)', 
+      label: 'Mercado', 
+      icon: <ShoppingCart size={20} />, 
+      allowed: ['admin'],
+      subItems: [
+        { path: '/market', label: 'Catálogo', icon: <Store size={20} />, allowed: ['admin'] },
+        { path: '/gestion-promociones', label: 'Promociones', icon: <Megaphone size={20} />, allowed: ['admin'] }
+      ]
+    },
+    { 
+      label: 'Contabilidad', 
       icon: <Receipt size={20} />, 
       allowed: ['admin'],
       subItems: [
+        { path: '/facturacion', label: 'Facturación ARCA', icon: <Receipt size={20} />, allowed: ['admin'] },
+        { path: '/erp/dashboard-liquidez', label: 'Cash Flow', icon: <Activity size={20} />, allowed: ['admin'] },
         { path: '/erp/gastos', label: 'Registro de Gastos', icon: <Receipt size={20} />, allowed: ['admin'] },
-        { path: '/erp/calculadora-costos', label: 'Calculadora', icon: <BarChart2 size={20} />, allowed: ['admin'] }
+        { path: '/erp/calculadora-costos', label: 'Calc. Costos', icon: <BarChart2 size={20} />, allowed: ['admin'] }
       ]
     },
-    { path: '/erp/dashboard-proveedores', label: 'Analítica Prov. (ERP)', icon: <BarChart2 size={20} />, allowed: ['admin'] },
+    { 
+      label: 'Stock e Inventario', 
+      icon: <Package size={20} />, 
+      allowed: ['admin'],
+      subItems: [
+        { path: '/inventario', label: 'Inventario', icon: <Package size={20} />, allowed: ['admin'] },
+        { path: '/erp/compras', label: 'Compras', icon: <ShoppingCart size={20} />, allowed: ['admin'] },
+        { path: '/erp/proveedores', label: 'Alta Proveedores', icon: <Truck size={20} />, allowed: ['admin'] }
+      ]
+    },
+    { 
+      path: '/erp/dashboard-proveedores', 
+      label: 'Estadísticas', 
+      icon: <BarChart2 size={20} />, 
+      allowed: ['admin'] 
+    }
   ];
 
   const visibleNavItems = navItems.filter(item => item.allowed.includes(role || 'admin'));
@@ -133,7 +152,7 @@ export default function Layout() {
                     </div>
                     {isExpanded && (
                       <ul style={{ paddingLeft: '16px', listStyle: 'none', marginTop: '4px' }}>
-                        {item.subItems.map(subItem => {
+                        {item.subItems.filter(sub => sub.allowed.includes(role || 'admin')).map(subItem => {
                           const isActive = location.pathname.startsWith(subItem.path);
                           return (
                             <li key={subItem.path} style={{ marginBottom: '4px' }}>
