@@ -20,6 +20,7 @@ import CheckoutLicencia from './pages/CheckoutLicencia';
 import CheckoutSuccess from './pages/checkout/CheckoutSuccess';
 import CheckoutFailure from './pages/checkout/CheckoutFailure';
 import CheckoutPending from './pages/checkout/CheckoutPending';
+import ComercializacionModulos from './pages/ComercializacionModulos';
 import { ActivityProvider } from './context/ActivityContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
@@ -96,6 +97,8 @@ function App() {
               <Route path="/erp/calculadora-costos" element={<ProtectedRoute allowedRoles={['admin']}><CalculadoraCostos /></ProtectedRoute>} />
               <Route path="/erp/dashboard-proveedores" element={<ProtectedRoute allowedRoles={['admin']}><DashboardProveedores /></ProtectedRoute>} />
               <Route path="/erp/dashboard-liquidez" element={<ProtectedRoute allowedRoles={['admin']}><DashboardLiquidez /></ProtectedRoute>} />
+              
+              <Route path="/comercializacion" element={<ProtectedRoute allowedRoles={['admin']}><ComercializacionModulos /></ProtectedRoute>} />
             </Route>
             
             <Route path="*" element={<Navigate to="/" replace />} />
