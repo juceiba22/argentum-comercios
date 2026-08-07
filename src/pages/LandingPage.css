@@ -109,22 +109,7 @@
   flex-wrap: wrap;
 }
 
-.btn-primary {
-  background-color: #2563EB;
-  color: #ffffff;
-  padding: 14px 28px;
-  border-radius: 8px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-}
 
-.btn-primary:hover {
-  background-color: #1d4ed8;
-  transform: translateY(-2px);
-}
 
 .btn-secondary {
   background-color: #ffffff;
@@ -417,6 +402,9 @@
 
 /* Responsive tweaks */
 @media (max-width: 768px) {
+  .landing-header {
+    padding: 16px 20px !important;
+  }
   .hero-title {
     font-size: 3.5rem;
   }

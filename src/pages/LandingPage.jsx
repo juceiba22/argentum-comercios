@@ -6,13 +6,13 @@ import './LandingPage.css';
 
 const SOLUTIONS = [
   {
-    title: 'El fantasma de ARCA, resuelto',
-    desc: 'Emite facturas electrónicas A y B autorizadas directamente ante ARCA (ex AFIP) al instante de concretar una venta. Olvídate de sistemas contables complejos o demoras manuales.',
+    title: 'Contabilidad al día y ultra-barata.',
+    desc: 'Emití facturas electrónicas autorizadas directamente ante ARCA (ex AFIP), desde la app con un sólo click.',
     icon: Shield
   },
   {
-    title: 'Punto de Venta Multimedio',
-    desc: 'Garantiza la trazabilidad absoluta del flujo de dinero de tu caja. Registra ventas cobrando en efectivo, transferencia, QR de Cuenta DNI o dispositivos físicos de Mercado Pago Point.',
+    title: 'Registrá y hacé tus ventas desde la app',
+    desc: 'Vinculá tu posnet y todos tus medios de pago. Nostros nos encargamos de sistematizarte toda la información de ingresos y egresos.',
     icon: CreditCard
   },
   {
@@ -123,7 +123,7 @@ export default function LandingPage() {
     <div className="landing-container">
       
       {/* HEADER NAV (Estilo Framer) */}
-      <header style={{ 
+      <div className="landing-header" style={{ 
         position: 'absolute', top: 0, left: 0, width: '100%', 
         padding: '24px 40px', display: 'flex', justifyContent: 'space-between', 
         alignItems: 'center', zIndex: 100 
@@ -132,7 +132,7 @@ export default function LandingPage() {
         <button className="btn-primary" style={{ height: '44px', padding: '0 20px', fontSize: '0.9rem', borderRadius: '99px' }} onClick={() => navigate('/login')}>
           Menu <ChevronRight size={16} />
         </button>
-      </header>
+      </div>
 
       {/* 1. HERO SECTION */}
       <section className="hero-section">
@@ -153,7 +153,7 @@ export default function LandingPage() {
             Conocenos
           </button>
           
-          <div className="btn-chat" onClick={() => scrollToSection('solutions')}>
+          <div className="btn-chat" onClick={() => window.open('https://wa.me/541178270751', '_blank')}>
             <div className="btn-chat-avatar">
               {/* Placeholder abstracto como solicitó el usuario */}
               <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Avatar de asesor" />
