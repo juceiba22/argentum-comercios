@@ -1,24 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, AlertCircle, Shield, CreditCard, TrendingDown, Lock } from 'lucide-react';
+import { Mail, AlertCircle, Lock, Check } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
-const SOLUTIONS = [
-  {
-    title: 'El fantasma de ARCA, resuelto',
-    desc: 'Emite facturas electrónicas A y B autorizadas directamente ante ARCA (ex AFIP) al instante de concretar una venta. Olvídate de sistemas contables complejos.',
-    icon: Shield
-  },
-  {
-    title: 'Punto de Venta Multimedio',
-    desc: 'Garantiza la trazabilidad absoluta del flujo de dinero de tu caja. Registra ventas cobrando en efectivo, transferencia o Mercado Pago.',
-    icon: CreditCard
-  },
-  {
-    title: 'Costo Contable al Mínimo',
-    desc: 'El sistema automatiza el desglose impositivo y genera cierres de caja detallados listos para exportar. Facilita la tarea de tu contador.',
-    icon: TrendingDown
-  }
-];
+import { planesComerciales } from '../data/planes';
 
 export default function CheckoutLicencia() {
   const navigate = useNavigate();
@@ -99,21 +82,24 @@ export default function CheckoutLicencia() {
             ${formattedPrice} <span style={{ fontSize: '1.1rem', color: 'var(--muted)', fontWeight: 'normal' }}>ARS / mes (primer pago)</span>
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-            {SOLUTIONS.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div key={idx} style={{ display: 'flex', gap: '16px' }}>
-                  <div style={{ background: 'var(--border-soft)', color: 'var(--text)', padding: '14px', borderRadius: '12px', height: 'fit-content' }}>
-                    <Icon size={24} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {(() => {
+              const selectedPlanData = planesComerciales.find(p => p.titulo === planName);
+              const features = selectedPlanData ? selectedPlanData.features : [
+                'Acceso completo a la plataforma',
+                'Soporte técnico especializado',
+                'Actualizaciones gratuitas'
+              ];
+              
+              return features.map((feature, idx) => (
+                <div key={idx} style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                  <div style={{ background: 'var(--border-soft)', color: 'var(--text)', padding: '10px', borderRadius: '12px', height: 'fit-content' }}>
+                    <Check size={20} />
                   </div>
-                  <div>
-                    <h3 style={{ fontSize: '1.15rem', marginBottom: '6px', color: 'var(--text)', fontWeight: '600' }}>{item.title}</h3>
-                    <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>{item.desc}</p>
-                  </div>
+                  <p style={{ color: 'var(--muted)', fontSize: '1.05rem', lineHeight: '1.5', margin: 0 }}>{feature}</p>
                 </div>
-              );
-            })}
+              ));
+            })()}
           </div>
         </div>
 

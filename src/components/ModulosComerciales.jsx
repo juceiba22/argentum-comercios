@@ -1,70 +1,8 @@
 import React from 'react';
-import { Package, Store, ShieldCheck, Check, Star, Zap } from 'lucide-react';
+import { Check } from 'lucide-react';
+import { planesComerciales } from '../data/planes';
 
 export default function ModulosComerciales({ onSeleccionarModulo }) {
-  const modulos = [
-    {
-      id: 'comercial',
-      titulo: 'Campañas Comerciales',
-      precio: '24.999',
-      precioNum: 24999,
-      recurrencia: 'mensuales',
-      icono: Store,
-      destacado: false,
-      features: [
-        'Integración de medios de pago',
-        'Alta y gestión de clientes',
-        'Campañas personalizadas por WhatsApp Business',
-        'Página web integrada al WhatsApp de la empresa'
-      ]
-    },
-    {
-      id: 'lite',
-      titulo: 'Versión Lite',
-      precio: '49.999',
-      precioNum: 49999,
-      recurrencia: 'mensuales',
-      icono: ShieldCheck,
-      destacado: false,
-      features: [
-        'Módulo contable exclusivo',
-        'Asignación de un contador dedicado',
-        'Contabilidad al día garantizada',
-        'Gestión fiscal e impositiva ante ARCA'
-      ]
-    },
-    {
-      id: 'pro',
-      titulo: 'Versión Pro',
-      precio: '74.999',
-      precioNum: 74999,
-      recurrencia: 'mensuales',
-      icono: Package,
-      destacado: false,
-      features: [
-        'Todo lo del plan Lite',
-        'Control y gestión de inventario',
-        'Control de stocks multidepósito',
-        'Flujo de caja y registro de ventas'
-      ]
-    },
-    {
-      id: 'pro-max',
-      titulo: 'Versión Pro Max',
-      precio: '99.999',
-      precioNum: 99999,
-      recurrencia: 'mensuales',
-      icono: Star,
-      destacado: true,
-      features: [
-        'Todos los módulos incluidos',
-        'Módulo Administrativo y Contable',
-        'Campañas Comerciales y WhatsApp',
-        'Soporte prioritario 24/7'
-      ]
-    }
-  ];
-
   return (
     <section id="pricing" style={{ padding: '80px 24px', maxWidth: '1200px', margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
@@ -82,7 +20,7 @@ export default function ModulosComerciales({ onSeleccionarModulo }) {
         gap: '32px',
         alignItems: 'stretch'
       }}>
-        {modulos.map((modulo) => {
+        {planesComerciales.map((modulo) => {
           const Icon = modulo.icono;
           return (
             <div 
