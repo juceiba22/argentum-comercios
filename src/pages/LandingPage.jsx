@@ -122,34 +122,49 @@ export default function LandingPage() {
   return (
     <div className="landing-container">
       
+      {/* HEADER NAV (Estilo Framer) */}
+      <header style={{ 
+        position: 'absolute', top: 0, left: 0, width: '100%', 
+        padding: '24px 40px', display: 'flex', justifyContent: 'space-between', 
+        alignItems: 'center', zIndex: 100 
+      }}>
+        <div className="brand-title serif italic" style={{ fontSize: '1.8rem', letterSpacing: '-0.05em' }}>Argentum®</div>
+        <button className="btn-primary" style={{ height: '44px', padding: '0 20px', fontSize: '0.9rem', borderRadius: '99px' }} onClick={() => navigate('/login')}>
+          Menu <ChevronRight size={16} />
+        </button>
+      </header>
+
       {/* 1. HERO SECTION */}
       <section className="hero-section">
-        <span className="hero-kicker">DIGITALIZACIÓN INTELIGENTE PARA PYMES</span>
-        <h1 className="hero-title serif">
-          Digitalizá tu comercio y lleva la contabilidad al día de manera <span className="italic">simple y ultra-barata.</span>
+        <h1 className="hero-title">
+          <span className="serif italic">Argentum,</span><br/>
+          desarrollo web<br/>
+          y contabilidad<br/>
+          en un solo lugar
         </h1>
         <p className="hero-subtitle">
-          Argentum fusiona el control de tu inventario, el cobro digital y la emisión directa de facturas ante ARCA (ex AFIP) en una sola plataforma. Digitalizá y reducí costos contables sin perder el control.
+          Creamos soluciones enlatadas y a medida. Minimizamos<br/>tus costos contables.
         </p>
         <div className="hero-ctas">
           <button 
             className="btn-primary" 
-            onClick={() => navigate('/checkout')}
-          >
-            Comprar Licencia ($150)
-          </button>
-          <button 
-            className="btn-primary" 
             onClick={() => scrollToSection('demo-selector')}
           >
-            Probar Demo En Vivo
+            Conocenos
           </button>
-          <button 
-            className="btn-secondary" 
-            onClick={() => scrollToSection('solutions')}
-          >
-            Conocer Módulos
-          </button>
+          
+          <div className="btn-chat" onClick={() => scrollToSection('solutions')}>
+            <div className="btn-chat-avatar">
+              {/* Placeholder abstracto como solicitó el usuario */}
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Avatar de asesor" />
+            </div>
+            <div className="btn-chat-content">
+              <span className="btn-chat-title">Chatéa con nosotros</span>
+              <span className="btn-chat-subtitle">
+                <span className="led-indicator"></span> 15 minutos
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 
