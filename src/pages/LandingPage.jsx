@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Dog, ShoppingBag, Store, Leaf, Beef, Shield, CreditCard, TrendingDown, ChevronRight, Apple, Wrench, Briefcase } from 'lucide-react';
 import { initializeDemoDatabase } from '../services/demoService';
 import './LandingPage.css';
+import ModulosComerciales from '../components/ModulosComerciales';
 
 const SOLUTIONS = [
   {
@@ -118,6 +119,10 @@ export default function LandingPage() {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  
+  const handleSeleccionarModulo = (modulo) => {
+    navigate(`/checkout?plan=${encodeURIComponent(modulo.titulo)}&price=${modulo.precioNum}`);
+  };
 
   return (
     <div className="landing-container">
@@ -148,6 +153,13 @@ export default function LandingPage() {
         <div className="hero-ctas">
           <button 
             className="btn-primary" 
+            onClick={() => scrollToSection('pricing')}
+            style={{ padding: '0 40px', fontSize: '1.15rem' }}
+          >
+            Quiero Argentum
+          </button>
+          <button 
+            className="btn-secondary" 
             onClick={() => scrollToSection('demo-selector')}
           >
             Conocenos
@@ -230,6 +242,11 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* 4. PRECIOS PÚBLICOS */}
+      <div id="pricing">
+        <ModulosComerciales onSeleccionarModulo={handleSeleccionarModulo} />
+      </div>
 
       {/* 4. PAGE FOOTER */}
       <footer className="landing-footer">

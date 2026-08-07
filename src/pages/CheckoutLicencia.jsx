@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, AlertCircle, Shield, CreditCard, TrendingDown, Lock } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const SOLUTIONS = [
   {
@@ -22,9 +22,17 @@ const SOLUTIONS = [
 
 export default function CheckoutLicencia() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  
+  const queryParams = new URLSearchParams(location.search);
+  const planName = queryParams.get('plan') || 'Plan Profesional';
+  const price = parseInt(queryParams.get('price')) || 150;
+  
+  // Formatear precio para la vista
+  const formattedPrice = price.toLocaleString('es-AR');
 
   const handleComprar = async (e) => {
     e.preventDefault();
@@ -44,8 +52,8 @@ export default function CheckoutLicencia() {
         },
         body: JSON.stringify({
           email: email,
-          planName: 'Plan Profesional',
-          price: 150,
+          planName: planName,
+          price: price,
         }),
       });
 
@@ -85,10 +93,10 @@ export default function CheckoutLicencia() {
           </button>
           
           <h1 className="brand-title serif" style={{ fontSize: '2.2rem', marginBottom: '8px', color: 'var(--text)' }}>
-            Plan Profesional
+            {planName}
           </h1>
           <p style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--text)', marginBottom: '40px', display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-            $150 <span style={{ fontSize: '1.1rem', color: 'var(--muted)', fontWeight: 'normal' }}>ARS / único pago</span>
+            ${formattedPrice} <span style={{ fontSize: '1.1rem', color: 'var(--muted)', fontWeight: 'normal' }}>ARS / mes (primer pago)</span>
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
@@ -149,12 +157,12 @@ export default function CheckoutLicencia() {
 
             <div style={{ borderTop: '1px solid var(--border-soft)', paddingTop: '24px', marginBottom: '32px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', color: 'var(--text)' }}>
-                <span>Subtotal</span>
-                <span>$150</span>
+                <span>Subtotal ({planName})</span>
+                <span>${formattedPrice}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '1.25rem', color: 'var(--text)' }}>
-                <span>Total</span>
-                <span>$150</span>
+                <span>Total a pagar hoy</span>
+                <span>${formattedPrice}</span>
               </div>
             </div>
 
@@ -169,7 +177,7 @@ export default function CheckoutLicencia() {
               }} 
               disabled={loading}
             >
-              {loading ? 'Iniciando pago...' : 'Confirmar y pagar $150'}
+              {loading ? 'Iniciando pago...' : `Confirmar y pagar $${formattedPrice}`}
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '20px', color: 'var(--muted)', fontSize: '0.85rem' }}>

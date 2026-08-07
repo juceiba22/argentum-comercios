@@ -1,27 +1,14 @@
 import React from 'react';
-import { Package, Store, ShieldCheck, Check } from 'lucide-react';
+import { Package, Store, ShieldCheck, Check, Star, Zap } from 'lucide-react';
 
 export default function ModulosComerciales({ onSeleccionarModulo }) {
   const modulos = [
     {
-      id: 'administracion',
-      titulo: 'Módulo Administración',
-      precio: '25.000',
-      recurrencia: 'único pago',
-      icono: Package,
-      destacado: false,
-      features: [
-        'Control y gestión de inventario',
-        'Control de stocks',
-        'Flujo de caja',
-        'Registro de ventas e ingresos'
-      ]
-    },
-    {
       id: 'comercial',
-      titulo: 'Módulo Comercial',
-      precio: '25.000',
-      recurrencia: 'único pago',
+      titulo: 'Campañas Comerciales',
+      precio: '24.999',
+      precioNum: 24999,
+      recurrencia: 'mensuales',
       icono: Store,
       destacado: false,
       features: [
@@ -32,29 +19,60 @@ export default function ModulosComerciales({ onSeleccionarModulo }) {
       ]
     },
     {
-      id: 'fiscal',
-      titulo: 'Situación Fiscal e Impositiva',
-      precio: '50.000',
+      id: 'lite',
+      titulo: 'Versión Lite',
+      precio: '49.999',
+      precioNum: 49999,
       recurrencia: 'mensuales',
       icono: ShieldCheck,
+      destacado: false,
+      features: [
+        'Módulo contable exclusivo',
+        'Asignación de un contador dedicado',
+        'Contabilidad al día garantizada',
+        'Gestión fiscal e impositiva ante ARCA'
+      ]
+    },
+    {
+      id: 'pro',
+      titulo: 'Versión Pro',
+      precio: '74.999',
+      precioNum: 74999,
+      recurrencia: 'mensuales',
+      icono: Package,
+      destacado: false,
+      features: [
+        'Todo lo del plan Lite',
+        'Control y gestión de inventario',
+        'Control de stocks multidepósito',
+        'Flujo de caja y registro de ventas'
+      ]
+    },
+    {
+      id: 'pro-max',
+      titulo: 'Versión Pro Max',
+      precio: '99.999',
+      precioNum: 99999,
+      recurrencia: 'mensuales',
+      icono: Star,
       destacado: true,
       features: [
-        'Asignación de un contador dedicado',
-        'Contabilidad al día utilizando el software',
-        'Control integral de la situación contable',
-        'Gestión fiscal e impositiva ante ARCA (ex AFIP)'
+        'Todos los módulos incluidos',
+        'Módulo Administrativo y Contable',
+        'Campañas Comerciales y WhatsApp',
+        'Soporte prioritario 24/7'
       ]
     }
   ];
 
   return (
-    <section style={{ padding: '80px 24px', maxWidth: '1200px', margin: '0 auto' }}>
+    <section id="pricing" style={{ padding: '80px 24px', maxWidth: '1200px', margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <h2 className="serif" style={{ fontSize: '2.5rem', marginBottom: '16px', color: 'var(--text)' }}>
-          Nuestros Módulos
+          Planes y Precios
         </h2>
         <p style={{ fontSize: '1.1rem', color: 'var(--muted)', maxWidth: '600px', margin: '0 auto' }}>
-          Elegí las herramientas exactas que tu negocio necesita. Pagá solo por lo que usás.
+          Elegí la versión exacta que tu negocio necesita. Pagá solo por lo que usás.
         </p>
       </div>
 
@@ -136,9 +154,9 @@ export default function ModulosComerciales({ onSeleccionarModulo }) {
               <button 
                 className={modulo.destacado ? "btn-primary" : "btn-secondary"}
                 style={{ width: '100%', marginTop: 'auto' }}
-                onClick={() => onSeleccionarModulo && onSeleccionarModulo(modulo.id)}
+                onClick={() => onSeleccionarModulo && onSeleccionarModulo(modulo)}
               >
-                Activar Módulo
+                Adquirir Plan
               </button>
             </div>
           );
