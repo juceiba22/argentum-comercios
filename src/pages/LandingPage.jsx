@@ -124,17 +124,16 @@ export default function LandingPage() {
       
       {/* 1. HERO SECTION */}
       <section className="hero-section">
-        <span className="hero-kicker font-sans">DIGITALIZACIÓN INTELIGENTE PARA PYMES</span>
-        <h1 className="hero-title font-serif">
-          Digitalizá tu comercio y lleva la contabilidad al día de manera simple y ultra-barata.
+        <span className="hero-kicker">DIGITALIZACIÓN INTELIGENTE PARA PYMES</span>
+        <h1 className="hero-title serif">
+          Digitalizá tu comercio y lleva la contabilidad al día de manera <span className="italic">simple y ultra-barata.</span>
         </h1>
-        <p className="hero-subtitle font-sans">
+        <p className="hero-subtitle">
           Argentum fusiona el control de tu inventario, el cobro digital y la emisión directa de facturas ante ARCA (ex AFIP) en una sola plataforma. Digitalizá y reducí costos contables sin perder el control.
         </p>
         <div className="hero-ctas">
           <button 
             className="btn-primary" 
-            style={{ backgroundColor: '#10B981', borderColor: '#10B981', color: '#fff' }}
             onClick={() => navigate('/checkout')}
           >
             Comprar Licencia ($150)
@@ -156,7 +155,7 @@ export default function LandingPage() {
 
       {/* 2. SECCIÓN DE DOLORES & SOLUCIONES */}
       <section id="solutions" className="soluciones-section">
-        <h2 className="soluciones-title font-serif">Diseñado para resolver tu operatoria contable diaria</h2>
+        <h2 className="soluciones-title serif">Diseñado para resolver tu operatoria contable diaria</h2>
         
         <div className="soluciones-grid">
           {SOLUTIONS.map((item, idx) => {
@@ -166,8 +165,8 @@ export default function LandingPage() {
                 <div className="solucion-icon">
                   <Icon size={28} />
                 </div>
-                <h3 className="solucion-name font-sans">{item.title}</h3>
-                <p className="solucion-desc font-sans">{item.desc}</p>
+                <h3 className="solucion-name">{item.title}</h3>
+                <p className="solucion-desc">{item.desc}</p>
               </div>
             );
           })}
@@ -178,8 +177,8 @@ export default function LandingPage() {
       <section id="demo-selector" className="selector-section">
         <div className="selector-wrapper">
           <div className="selector-header">
-            <h2 className="selector-title font-serif">Elegí tu rubro y experimentá Argentum ahora mismo</h2>
-            <p className="selector-subtitle font-sans">
+            <h2 className="selector-title serif">Elegí tu rubro y experimentá Argentum ahora mismo</h2>
+            <p className="selector-subtitle">
               Haz clic en cualquiera de las siguientes configuraciones preestablecidas para ingresar inmediatamente al software con un catálogo de productos e impuestos listos para probar.
             </p>
           </div>
@@ -195,17 +194,17 @@ export default function LandingPage() {
                   style={{ position: 'relative' }}
                 >
                   {rubro.badge && (
-                    <span className="rubro-badge-new font-sans">
+                    <span className="rubro-badge-new">
                       {rubro.badge}
                     </span>
                   )}
                   <div className="rubro-icon-wrapper" style={{ backgroundColor: rubro.bgLight, color: rubro.color }}>
                     <Icon size={26} />
                   </div>
-                  <h3 className="rubro-name font-sans">{rubro.nombre}</h3>
-                  <p className="rubro-desc font-sans">{rubro.descripcion}</p>
+                  <h3 className="rubro-name">{rubro.nombre}</h3>
+                  <p className="rubro-desc">{rubro.descripcion}</p>
                   <button 
-                    className="rubro-btn-demo font-sans"
+                    className="rubro-btn-demo"
                     style={{ backgroundColor: `${rubro.color}15`, color: rubro.color }}
                   >
                     Probar Demo <ChevronRight size={14} style={{ display: 'inline', marginLeft: '2px', verticalAlign: 'middle' }} />
@@ -220,10 +219,10 @@ export default function LandingPage() {
       {/* 4. PAGE FOOTER */}
       <footer className="landing-footer">
         <div className="footer-content">
-          <p className="footer-copy font-sans">
+          <p className="footer-copy">
             © {new Date().getFullYear()} Argentum Comercios. Todos los derechos reservados.
           </p>
-          <Link to="/login" className="footer-link-login font-sans">
+          <Link to="/login" className="footer-link-login">
             ¿Tienes una cuenta? Iniciar Sesión (Producción)
           </Link>
         </div>
