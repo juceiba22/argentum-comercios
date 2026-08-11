@@ -18,13 +18,23 @@ export default async function handler(req, res) {
   }
 
   // 1. Inicializar SDK de Mercado Pago
+  if (!process.env.MP_ACCESS_TOKEN) {
+    console.error('Error: MP_ACCESS_TOKEN no está definido.');
+    return res.status(500).json({ success: false, error: 'Server configuration error (MP)' });
+  }
   const client = new MercadoPagoConfig({ 
-    accessToken: process.env.MP_ACCESS_TOKEN || ''
+    accessToken: process.env.MP_ACCESS_TOKEN
   });
 
-  // 2. Inicializar Cliente Supabase
-  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
+  // 2. Inicializar Cliente Supabase (unificado con PP)
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    console.error('Error: Faltan credenciales de Supabase.');
+    return res.status(500).json({ success: false, error: 'Server configuration error (DB)' });
+  }
+  
   const supabase = createClient(supabaseUrl, supabaseKey);
 
   const { email, planName, price } = req.body;
