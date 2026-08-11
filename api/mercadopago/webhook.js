@@ -1,5 +1,6 @@
 import { MercadoPagoConfig, Payment } from 'mercadopago';
 import { createClient } from '@supabase/supabase-js';
+import { Resend } from 'resend';
 
 // Vercel Serverless Function para procesar Webhooks de MP
 export default async function handler(req, res) {
@@ -91,6 +92,30 @@ export default async function handler(req, res) {
           valida_hasta: validUntil.toISOString(),
           external_reference_pago: externalReference
         }, { onConflict: 'email' });
+
+      // Enviar email de confirmación con Resend
+      if (process.env.RESEND_API_KEY) {
+        try {
+          const resend = new Resend(process.env.RESEND_API_KEY);
+          await resend.emails.send({
+            from: 'Argentum <onboarding@resend.dev>', // Importante: Cambia a tu dominio verificado en Resend en prod
+            to: [email],
+            subject: 'Confirmación de Pago - Argentum Comercios',
+            html: `
+              <h2>¡Pago Confirmado!</h2>
+              <p>Hola,</p>
+              <p>Hemos recibido correctamente tu pago para el <strong>${plan}</strong>.</p>
+              <p>Tu licencia ya se encuentra activa y será válida hasta el ${validUntil.toLocaleDateString('es-AR')}.</p>
+              <p>Ya puedes acceder y disfrutar de todas las funcionalidades del sistema.</p>
+              <br/>
+              <p>Saludos cordiales,<br/>El equipo de Argentum</p>
+            `
+          });
+          console.log(`Email enviado a ${email}`);
+        } catch (emailError) {
+          console.error('Error enviando email con Resend:', emailError);
+        }
+      }
 
     } else if (status === 'rejected' || status === 'cancelled') {
       // Actualizar a rechazado
