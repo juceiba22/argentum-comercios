@@ -3,6 +3,14 @@ import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 
 // Vercel Serverless Function para procesar Webhooks de MP
+//
+// IMPORTANTE: este es el ÚNICO webhook que activa licencias_activas. Existió
+// una segunda implementación en jolly-turing/api/mercadopago/index.js que
+// escribía a la misma tabla con reglas distintas (sin tocar licencias_pagos,
+// sin exigir Service Role Key) y quedó sin usar tras unificar: no la
+// reintroduzcas ahí. Si en el futuro se necesita otro punto de entrada para
+// activar licencias, que llame a la lógica de este archivo en vez de
+// reimplementarla.
 export default async function handler(req, res) {
   // CORS para MP Webhooks (pre-flight)
   if (req.method === 'OPTIONS') {
@@ -51,8 +59,18 @@ export default async function handler(req, res) {
     }
 
     // 3. Inicializar Cliente Supabase
+    // IMPORTANTE: requiere Service Role Key. licencias_activas tiene RLS con
+    // policies solo para el rol "authenticated"; este webhook corre server-side
+    // sin sesión de usuario (rol "anon"), así que con la anon key el upsert de
+    // la licencia queda bloqueado en silencio y el pago nunca se refleja.
     const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+    if (!supabaseUrl || !supabaseKey) {
+      console.error('Error crítico: falta SUPABASE_URL y/o SUPABASE_SERVICE_ROLE_KEY. No se puede procesar el pago.');
+      return res.status(500).send('Server configuration error (DB)');
+    }
+
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // 4. Buscar el registro pendiente
@@ -107,6 +125,10 @@ export default async function handler(req, res) {
 
       if (upsertError) {
         console.error('Error crítico al guardar en licencias_activas:', upsertError);
+        // No devolvemos 200: si MP reintenta el webhook, hay otra chance de
+        // que el upsert se concrete. Devolver 200 acá dejaba pagos aprobados
+        // sin licencia activa y sin ninguna forma de detectarlo.
+        return res.status(500).send('Error al activar la licencia');
       }
 
       // 3. Enviar email de confirmación con Resend

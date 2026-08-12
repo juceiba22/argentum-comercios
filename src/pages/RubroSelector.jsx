@@ -1,7 +1,7 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import { Dog, ShoppingBag, Store, Leaf, Beef, Sandwich } from 'lucide-react';
 import { initializeDemoDatabase } from '../services/demoService';
+import { SISTEMA_URL } from '../config/sistemaUrl';
 
 const RUBROS = [
   {
@@ -55,8 +55,6 @@ const RUBROS = [
 ];
 
 export default function RubroSelector() {
-  const navigate = useNavigate();
-
   const handleSelectRubro = (rubroId) => {
     localStorage.setItem('argentum_demo_mode', 'true');
     localStorage.setItem('argentum_rubro', rubroId);
@@ -108,7 +106,7 @@ export default function RubroSelector() {
         <footer style={styles.pageFooter}>
           <p>© {new Date().getFullYear()} Argentum Comercios ERP & POS. Todos los derechos reservados.</p>
           <p style={{ marginTop: '10px', fontSize: '0.85rem' }}>
-            ¿Tienes una cuenta? <Link to="/login" style={{ color: '#3b82f6', textDecoration: 'none', fontWeight: '600' }}>Iniciar Sesión (Producción)</Link>
+            ¿Tienes una cuenta? <a href={SISTEMA_URL} style={{ color: '#3b82f6', textDecoration: 'none', fontWeight: '600' }}>Iniciar Sesión (Producción)</a>
           </p>
         </footer>
       </div>

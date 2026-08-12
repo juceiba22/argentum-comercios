@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
+import { SISTEMA_URL } from '../../config/sistemaUrl';
 
 export default function CheckoutSuccess() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function CheckoutSuccess() {
           Tu pago fue procesado con éxito. En breve vas a recibir un email con los datos de acceso para ingresar a la plataforma.
         </p>
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexDirection: 'column' }}>
-          <button className="btn btn-primary" onClick={() => navigate('/login')} style={{ width: '100%', padding: '12px' }}>
+          <button className="btn btn-primary" onClick={() => window.location.href = SISTEMA_URL} style={{ width: '100%', padding: '12px' }}>
             Ir a Iniciar Sesión
           </button>
           <button className="btn btn-secondary" onClick={() => navigate('/')} style={{ width: '100%', padding: '12px' }}>

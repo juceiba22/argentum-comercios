@@ -27,11 +27,15 @@ export default async function handler(req, res) {
   });
 
   // 2. Inicializar Cliente Supabase (unificado con PP)
+  // IMPORTANTE: requiere la Service Role Key. licencias_pagos/licencias_activas
+  // tienen RLS con policies para el rol "authenticated"; este endpoint corre
+  // server-side sin sesión de usuario (rol "anon"), así que con la anon key
+  // los INSERT/UPSERT quedan bloqueados en silencio.
   const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-  
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
   if (!supabaseUrl || !supabaseKey) {
-    console.error('Error: Faltan credenciales de Supabase.');
+    console.error('Error: Falta SUPABASE_URL y/o SUPABASE_SERVICE_ROLE_KEY (variable de servidor, no VITE_).');
     return res.status(500).json({ success: false, error: 'Server configuration error (DB)' });
   }
   

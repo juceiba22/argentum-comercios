@@ -1,8 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '../services/supabaseClient';
 
 const AuthContext = createContext();
 
+// Argentum-Comercios es solo landing + checkout + demo local. NUNCA debe
+// manejar sesiones reales de Supabase: el sistema real (con el gate de
+// trial/licencia) es jolly-turing (ver SISTEMA_URL en config/sistemaUrl.js).
+// "user" acá solo puede existir por haber entrado al modo demo (datos
+// falsos en localStorage, ver services/demoService.js) — nunca por login
+// real. Si en el futuro hace falta autenticación real en este repo, que
+// redirija a SISTEMA_URL en vez de reimplementar login acá.
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
@@ -25,32 +31,8 @@ export const AuthProvider = ({ children }) => {
         user_metadata: { role: 'admin', rubro }
       });
       setRole('admin');
-      setLoading(false);
-      return;
     }
-
-    const resolveRole = (sessionUser) => {
-      if (!sessionUser) return null;
-      if (sessionUser.email === 'ventas@argentum.com') return 'ventas';
-      return sessionUser.user_metadata?.role || 'admin';
-    };
-
-    // Inicializar sesión
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user || null);
-      setRole(resolveRole(session?.user));
-      setLoading(false);
-    });
-
-    // Escuchar cambios de estado
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      // Si entra en demo durante la sesión, prevenir sobreescribir con null de Supabase
-      if (localStorage.getItem('argentum_demo_mode') === 'true') return;
-      setUser(session?.user || null);
-      setRole(resolveRole(session?.user));
-    });
-
-    return () => subscription.unsubscribe();
+    setLoading(false);
   }, []);
 
   return (

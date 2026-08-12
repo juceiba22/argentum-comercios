@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
-import Login from './pages/Login';
 import Clientes from './pages/Clientes';
 import Inventario from './pages/Inventario';
 import Market from './pages/Market';
@@ -70,9 +69,6 @@ function App() {
             {/* Ruta Principal (Selector de rubros / Home) */}
             <Route path="/" element={<RubroOrHome />} />
 
-            {/* Acceso administrativo manual */}
-            <Route path="/login" element={<Login />} />
-            
             {/* Checkout Público */}
             <Route path="/checkout" element={<CheckoutLicencia />} />
             <Route path="/checkout/success" element={<CheckoutSuccess />} />
