@@ -63,11 +63,11 @@ export default async function handler(req, res) {
       .single();
 
     if (findError || !pagoPendiente) {
-      console.error('No se encontró pago pendiente para external_reference:', externalReference);
-      return res.status(200).send('Pending payment not found');
+      console.warn('No se encontró pago pendiente para external_reference:', externalReference, '- Continuando ejecución.');
     }
 
-    const { email, plan } = pagoPendiente;
+    const email = pagoPendiente?.email;
+    const plan = pagoPendiente?.plan;
 
     // 5. Procesar el estado
     if (status === 'approved') {
@@ -77,41 +77,62 @@ export default async function handler(req, res) {
         .update({ estado: 'pagado' })
         .eq('external_reference', externalReference);
 
-      // Otorgar 1 año de vigencia (ejemplo estándar)
+      // 1. Obtención limpia del email del pagador
+      const payerEmail = (
+        paymentInfo.payer?.email ||
+        paymentInfo.metadata?.payer_email ||
+        paymentInfo.external_reference ||
+        email ||
+        ''
+      )?.toLowerCase().trim();
+
+      // Plan Name
+      const planName = paymentInfo.metadata?.plan_name || plan || 'Pro';
+
+      // Otorgar 1 año de vigencia
       const validUntil = new Date();
       validUntil.setFullYear(validUntil.getFullYear() + 1);
 
-      // Crear o actualizar licencia activa usando el email como clave única
+      // 2. Upsert en 'licencias_activas'
       await supabase
         .from('licencias_activas')
         .upsert({
-          email: email,
-          plan: plan,
+          email: payerEmail,
+          plan: planName,
           estado: 'activa',
           fecha_compra: dateApproved || new Date().toISOString(),
           valida_hasta: validUntil.toISOString(),
-          external_reference_pago: externalReference
+          external_reference_pago: String(paymentId)
         }, { onConflict: 'email' });
 
-      // Enviar email de confirmación con Resend
+      // 3. Upsert en 'licencias_activacion'
+      await supabase
+        .from('licencias_activacion')
+        .upsert({
+          email: payerEmail,
+          plan: planName,
+          estado: 'pendiente'
+        }, { onConflict: 'email' });
+
+      // 4. Enviar email de confirmación con Resend
       if (process.env.RESEND_API_KEY) {
         try {
           const resend = new Resend(process.env.RESEND_API_KEY);
           await resend.emails.send({
             from: 'Argentum <onboarding@resend.dev>', // Importante: Cambia a tu dominio verificado en Resend en prod
-            to: [email],
+            to: [payerEmail],
             subject: 'Confirmación de Pago - Argentum Comercios',
             html: `
               <h2>¡Pago Confirmado!</h2>
               <p>Hola,</p>
-              <p>Hemos recibido correctamente tu pago para el <strong>${plan}</strong>.</p>
+              <p>Hemos recibido correctamente tu pago para el <strong>${planName}</strong>.</p>
               <p>Tu licencia ya se encuentra activa y será válida hasta el ${validUntil.toLocaleDateString('es-AR')}.</p>
               <p>Ya puedes acceder y disfrutar de todas las funcionalidades del sistema.</p>
               <br/>
               <p>Saludos cordiales,<br/>El equipo de Argentum</p>
             `
           });
-          console.log(`Email enviado a ${email}`);
+          console.log(`Email enviado a ${payerEmail}`);
         } catch (emailError) {
           console.error('Error enviando email con Resend:', emailError);
         }
