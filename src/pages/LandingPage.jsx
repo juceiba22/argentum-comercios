@@ -160,16 +160,16 @@ export default function LandingPage() {
           >
             Quiero Argentum
           </button>
-          <div className="btn-chat" onClick={() => window.open('https://argentum-pp.vercel.app/', '_blank')}>
+          <div className="btn-chat" onClick={() => window.open('https://argentum-pp.vercel.app/registro', '_blank')}>
             <div className="btn-chat-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#4F46E5' }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
               </svg>
             </div>
             <div className="btn-chat-content">
-              <span className="btn-chat-title">Probá la demo</span>
+              <span className="btn-chat-title">Probá Gratis (15 días)</span>
               <span className="btn-chat-subtitle">
-                Sin registrarse
+                Registro y configuración
               </span>
             </div>
           </div>
@@ -258,7 +258,7 @@ export default function LandingPage() {
 
       {/* Floating WhatsApp Button */}
       <a 
-        href="https://wa.me/541178270751" 
+        href="https://wa.me/541178270751?text=Quiero%20saber%20m%C3%A1s%20de%20Argentum" 
         target="_blank" 
         rel="noopener noreferrer"
         style={{
