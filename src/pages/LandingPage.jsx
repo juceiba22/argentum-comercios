@@ -134,7 +134,7 @@ export default function LandingPage() {
         alignItems: 'center', zIndex: 100 
       }}>
         <div className="brand-title serif italic" style={{ fontSize: '1.8rem', letterSpacing: '-0.05em' }}>Argentum®</div>
-        <button className="btn-primary" style={{ height: '44px', padding: '0 20px', fontSize: '0.9rem', borderRadius: '99px' }} onClick={() => navigate('/login')}>
+        <button className="btn-primary" style={{ height: '44px', padding: '0 20px', fontSize: '0.9rem', borderRadius: '99px' }} onClick={() => window.location.href = 'https://argentum-pp.vercel.app/'}>
           Ingresar <ChevronRight size={16} />
         </button>
       </div>
@@ -248,9 +248,9 @@ export default function LandingPage() {
           <p className="footer-copy">
             © {new Date().getFullYear()} Argentum Comercios. Todos los derechos reservados.
           </p>
-          <Link to="/login" className="footer-link-login">
+          <a href="https://argentum-pp.vercel.app/" className="footer-link-login">
             ¿Tienes una cuenta? Iniciar Sesión (Producción)
-          </Link>
+          </a>
         </div>
       </footer>
     </div>
