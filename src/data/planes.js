@@ -4,8 +4,8 @@ export const planesComerciales = [
   {
     id: 'lite',
     titulo: 'Versión Lite',
-    precio: '49.999',
-    precioNum: 49999,
+    precio: '150',
+    precioNum: 150,
     recurrencia: 'mensuales',
     icono: ShieldCheck,
     destacado: false,
@@ -19,8 +19,8 @@ export const planesComerciales = [
   {
     id: 'pro',
     titulo: 'Versión Pro',
-    precio: '74.999',
-    precioNum: 74999,
+    precio: '150',
+    precioNum: 150,
     recurrencia: 'mensuales',
     icono: Package,
     destacado: false,
@@ -34,8 +34,8 @@ export const planesComerciales = [
   {
     id: 'pro-max',
     titulo: 'Versión Pro Max',
-    precio: '99.999',
-    precioNum: 99999,
+    precio: '150',
+    precioNum: 150,
     recurrencia: 'mensuales',
     icono: Star,
     destacado: true,
