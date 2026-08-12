@@ -93,8 +93,8 @@ export default async function handler(req, res) {
       const validUntil = new Date();
       validUntil.setFullYear(validUntil.getFullYear() + 1);
 
-      // 2. Upsert en 'licencias_activas'
-      await supabase
+      // 2. Upsert DIRECTO y OBLIGATORIO en 'licencias_activas'
+      const { error: upsertError } = await supabase
         .from('licencias_activas')
         .upsert({
           email: payerEmail,
@@ -105,16 +105,11 @@ export default async function handler(req, res) {
           external_reference_pago: String(paymentId)
         }, { onConflict: 'email' });
 
-      // 3. Upsert en 'licencias_activacion'
-      await supabase
-        .from('licencias_activacion')
-        .upsert({
-          email: payerEmail,
-          plan: planName,
-          estado: 'pendiente'
-        }, { onConflict: 'email' });
+      if (upsertError) {
+        console.error('Error crítico al guardar en licencias_activas:', upsertError);
+      }
 
-      // 4. Enviar email de confirmación con Resend
+      // 3. Enviar email de confirmación con Resend
       if (process.env.RESEND_API_KEY) {
         try {
           const resend = new Resend(process.env.RESEND_API_KEY);
