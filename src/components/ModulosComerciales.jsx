@@ -91,10 +91,16 @@ export default function ModulosComerciales({ onSeleccionarModulo }) {
 
               <button 
                 className={modulo.destacado ? "btn-primary" : "btn-secondary"}
-                style={{ width: '100%', marginTop: 'auto' }}
-                onClick={() => onSeleccionarModulo && onSeleccionarModulo(modulo)}
+                style={{ 
+                  width: '100%', 
+                  marginTop: 'auto',
+                  opacity: modulo.disponible === false ? 0.5 : 1,
+                  cursor: modulo.disponible === false ? 'not-allowed' : 'pointer'
+                }}
+                onClick={() => modulo.disponible !== false && onSeleccionarModulo && onSeleccionarModulo(modulo)}
+                disabled={modulo.disponible === false}
               >
-                Adquirir Plan
+                {modulo.disponible === false ? "No Disponible" : "Adquirir Plan"}
               </button>
             </div>
           );

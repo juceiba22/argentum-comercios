@@ -8,42 +8,41 @@ export const planesComerciales = [
     precioNum: 49999,
     recurrencia: 'mensuales',
     icono: ShieldCheck,
-    destacado: false,
+    destacado: true,
+    disponible: true,
     features: [
-      'Módulo contable exclusivo',
-      'Asignación de un contador dedicado',
-      'Contabilidad al día garantizada',
-      'Gestión fiscal e impositiva ante ARCA'
+      'Gestión de inventario',
+      'Punto de venta',
+      'Contabilidad y facturación electrónica ARCA'
     ]
   },
   {
     id: 'pro',
-    titulo: 'Versión Pro',
+    titulo: 'Versión Pro (NO disponible)',
     precio: '74.999',
     precioNum: 74999,
     recurrencia: 'mensuales',
     icono: Package,
     destacado: false,
+    disponible: false,
     features: [
-      'Todo lo del plan Lite',
-      'Control y gestión de inventario',
-      'Control de stocks multidepósito',
-      'Flujo de caja y registro de ventas'
+      'Lite + Automatización de ventas',
+      'Página e-commerce',
+      'Acompañante IA para tu negocio'
     ]
   },
   {
-    id: 'pro-max',
-    titulo: 'Versión Pro Max',
+    id: 'max',
+    titulo: 'Versión Max (NO disponible)',
     precio: '99.999',
     precioNum: 99999,
     recurrencia: 'mensuales',
     icono: Star,
-    destacado: true,
+    destacado: false,
+    disponible: false,
     features: [
-      'Todos los módulos incluidos',
-      'Módulo Administrativo y Contable',
-      'Campañas Comerciales y WhatsApp',
-      'Soporte prioritario 24/7'
+      'Pro + Asesoría contable',
+      'Gestión fiscal e impositiva ante ARCA'
     ]
   }
 ];
